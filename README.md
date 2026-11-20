@@ -12,6 +12,7 @@ choisir une version :
 | v1 · Les leçons | [`v1/`](v1/) | 12 niveaux guidés, consignes lues à voix haute : de i à l'algèbre géométrique de Hestenes |
 | v2 · Les cubes qui roulent | [`v2/`](v2/) | jeu de réflexion : le dessus du cube garde la mémoire du chemin (l'ordre des rotations compte) |
 | v3 · Les tourbillons | [`v3/`](v3/) | jeu rapide à la Candy Crush : on fait tourner des carrés d'animaux, Rush 60 s, défi du jour |
+| v4 · Les défis éclair | [`v4/`](v4/) | les 9 situations de la v1 en défis de quelques secondes, « faire » et « prévoir », séries, médailles, Rush |
 
 Chaque dossier a son README. Aucune dépendance : HTML, JavaScript (modules ES) et Canvas 2D.
 Idées mises de côté : [`idees/`](idees/).
