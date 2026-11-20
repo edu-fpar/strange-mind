@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Strange Mind v2</title>
+  <meta name="description" content="Fais rouler les cubes jusqu'à leur maison, avec le bon animal sur le dessus.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <section id="map" class="screen" hidden>
+    <header class="map-head">
+      <a class="icon-btn" href="../" title="Accueil">🏠</a>
+      <h1>Les cubes qui roulent <small>v2</small></h1>
+      <button id="opt-sound" class="icon-btn" title="Son">🔊</button>
+      <button id="btn-help" class="icon-btn" title="Comment jouer">❔</button>
+    </header>
+    <div id="worlds"></div>
+  </section>
+
+  <section id="play" class="screen" hidden>
+    <header id="hud">
+      <button id="btn-map" class="icon-btn" title="Carte">🗺️</button>
+      <div class="info">
+        <div class="title" id="hud-title"></div>
+        <div class="moves"><b id="hud-moves">0</b> coups <span class="par">· ★ en <b id="hud-par">0</b></span> <span id="hud-fish" class="fish"></span></div>
+      </div>
+      <canvas id="net" title="Les 6 faces du cube (au centre : le dessus, à droite : le dessous)"></canvas>
+      <button id="btn-hint" class="icon-btn" title="Indice">💡</button>
+      <button id="btn-undo" class="icon-btn" title="Annuler">↶</button>
+      <button id="btn-restart" class="icon-btn" title="Recommencer">↻</button>
+    </header>
+    <div id="board"></div>
+  </section>
+
+  <div id="modal" hidden><div class="modal-card"><div class="modal-body"></div></div></div>
+
+  <template id="help-template">
+    <h2>Comment jouer</h2>
+    <p><b>Glisse</b> (doigt, souris, pavé tactile) ou utilise les <b>flèches</b> : le cube <b>roule</b> d'une case.
+      Le dessin du dessus change à chaque roulade !</p>
+    <p>Amène chaque cube sur sa <b>maison</b> (case en pointillés) avec <b>le bon animal sur le dessus</b>.
+      Si la maison montre un animal tourné, il doit regarder dans ce sens. ↻ veut dire : peu importe le sens.</p>
+    <p>🌊 On n'entre dans l'eau qu'avec le <b>dauphin</b> sur le dessus, et dans l'eau on nage sans rouler.<br>
+      ❄️ Sur la glace, on glisse sans rouler.<br>
+      🎠 Le manège fait tourner le cube sur place.<br>
+      👯 Les jumeaux bougent ensemble, en miroir.</p>
+    <p>↶ annule un coup, 💡 montre le meilleur coup. Trouve le chemin le plus court pour les étoiles, et le poisson doré 🐟 caché !</p>
+    <button class="btn primary" data-act="ok">C'est parti !</button>
+  </template>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

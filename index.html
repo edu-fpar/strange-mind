@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Strange Mind</title>
+  <style>
+    :root { color: #3d2c6b; font-family: "Baloo 2", "Comic Sans MS", "Trebuchet MS", system-ui, sans-serif; }
+    body { margin: 0; min-height: 100vh; background: radial-gradient(circle at 30% 0%, #ffe9f3, #d9ecff 60%, #c9b6f2); display: grid; place-items: center; }
+    main { width: min(900px, 100% - 32px); padding: 24px 0; }
+    h1 { text-align: center; font-size: clamp(32px, 7vw, 54px); margin: 0 0 6px; color: #7b2cbf; }
+    p.sub { text-align: center; margin: 0 0 24px; color: #7b6fa8; }
+    .cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    a.card { display: block; text-decoration: none; color: inherit; background: #fff; border-radius: 22px; padding: 18px; box-shadow: 0 6px 0 #cdbdf0, 0 10px 24px rgba(80,50,140,.12); transition: transform .15s; }
+    a.card:hover { transform: translateY(-4px); }
+    .card .big { font-size: 46px; }
+    .card h2 { margin: 6px 0 4px; }
+    .card p { margin: 0; line-height: 1.4; color: #5b4f86; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Strange Mind</h1>
+    <p class="sub">Trois façons de jouer avec des formes qui tournent.</p>
+    <div class="cards">
+      <a class="card" href="v1/"><div class="big">🦉</div><h2>v1 · Les leçons</h2>
+        <p>Version guidée : 12 niveaux, des consignes lues à voix haute, de i à l'algèbre géométrique.</p></a>
+      <a class="card" href="v2/"><div class="big">🎲</div><h2>v2 · Les cubes qui roulent</h2>
+        <p>Jeu de réflexion : amène chaque cube à sa maison avec le bon animal sur le dessus. Le chemin compte !</p></a>
+      <a class="card" href="v3/"><div class="big">🌀</div><h2>v3 · Les tourbillons</h2>
+        <p>Jeu rapide à la Candy Crush : on fait tourner des carrés d'animaux, parades, fusées, Rush 60 s.</p></a>
+    </div>
+  </main>
+</body>
+</html>

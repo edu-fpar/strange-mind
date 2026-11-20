@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Strange Mind v3</title>
+  <meta name="description" content="Fais tourner les animaux par carrés de quatre, aligne-les, fais des parades et des tourbillons.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- ================= CARTE ================= -->
+  <section id="map" class="screen" hidden>
+    <header class="map-head">
+      <h1>Strange Mind <small style="font-size:.4em;opacity:.6">v3</small></h1>
+      <button id="opt-sound" class="icon-btn" title="Son">🔊</button>
+      <button id="btn-help" class="icon-btn" title="Comment jouer">❔</button>
+    </header>
+    <div class="modes">
+      <button id="btn-rush" class="mode rush"><span class="big">⚡</span><b>Rush 60 s</b><small id="rush-best"></small></button>
+      <button id="btn-daily" class="mode daily"><span class="big">📅</span><b>Défi du jour</b><small id="daily-best"></small></button>
+    </div>
+    <div id="map-levels" class="path"></div>
+    <p class="v1link"><a href="../v1/">Strange Mind v1 (version guidée)</a></p>
+  </section>
+
+  <!-- ================= PARTIE ================= -->
+  <section id="play" class="screen" hidden>
+    <header id="hud">
+      <button id="btn-map" class="icon-btn" title="Carte">🗺️</button>
+      <div class="moves"><b id="hud-moves">0</b><small id="hud-moves-label">coups</small></div>
+      <div class="mid">
+        <div class="title" id="hud-title"></div>
+        <div id="hud-goals" class="goals"></div>
+      </div>
+      <div class="score">
+        <b id="hud-score">0</b>
+        <div id="hud-starbar" class="starbar"><i id="hud-bar"></i><span class="mark">★</span><span class="mark">★</span><span class="mark">★</span></div>
+      </div>
+      <button id="btn-restart" class="icon-btn" title="Recommencer">↻</button>
+    </header>
+    <div id="board"></div>
+    <div id="flash"></div>
+  </section>
+
+  <div id="modal" hidden><div class="modal-card"><div class="modal-body"></div></div></div>
+
+  <template id="help-template">
+    <h2>Comment jouer</h2>
+    <p><b>Touche</b> entre 4 animaux : le carré tourne ↻.<br>
+      <b>Glisse en rond</b> (ou tourne avec deux doigts, ou la molette) pour choisir le sens.</p>
+    <p>Aligne <b>3 animaux pareils</b> : ils éclatent.</p>
+    <p>S'ils regardent <b>tous du même côté</b>, c'est une <b>parade</b> 🎺 :
+      4 en parade donnent une <b>fusée</b> 🚀, 5 un <b>tourbillon</b> 🌀 qui fait tourner tout le plateau.
+      Un L ou un T donne une <b>bombe</b> 💥.</p>
+    <p>Deux animaux pareils qui se regardent <b>face à face</b> font un <b>bisou</b> 💋 !</p>
+    <button class="btn primary" data-act="ok">C'est parti !</button>
+  </template>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
