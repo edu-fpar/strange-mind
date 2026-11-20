@@ -10,6 +10,7 @@
 import { Quat, Z, DEG, norm360, dot, norm } from './math3d.js';
 import { SHAPES } from './shapes.js';
 import { faceSpec, makeFaceTexture, GLYPH_VALUE } from './glyphs.js';
+import { t } from './i18n.js';
 
 const LIGHT = norm([-0.45, 0.6, 1]);
 const ANIM_MS = 320;
@@ -278,8 +279,8 @@ export class World {
       bar.append(b);
       return b;
     };
-    const ccw = mk(1, '↺', 'Tourner (sens inverse des aiguilles)');
-    const cw = mk(-1, '↻', 'Tourner (sens des aiguilles)');
+    const ccw = mk(1, '↺', t('Tourner (sens inverse des aiguilles)'));
+    const cw = mk(-1, '↻', t('Tourner (sens des aiguilles)'));
     this.overlay.append(bar);
     return { bar, ccw, cw };
   }

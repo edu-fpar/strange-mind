@@ -2,6 +2,12 @@
 import { Game } from './game.js';
 import { LEVELS, RUSH, SPECIES } from './levels.js';
 import { drawGlyph } from './glyphs.js';
+import { t, setDictionary, translateDom, langToggle } from './i18n.js';
+import EN from './i18n-en.js';
+
+setDictionary(EN);
+translateDom();
+langToggle(document.querySelector('#btn-lang'));
 
 const $ = (s) => document.querySelector(s);
 
@@ -75,12 +81,12 @@ function renderMap() {
     const b = document.createElement('button');
     b.className = 'node' + (locked ? ' locked' : '') + (stars ? ' done' : '') + (!locked && !stars ? ' next' : '');
     b.style.setProperty('--x', ['0%', '30%', '55%', '30%', '0%', '-30%', '-55%', '-30%', '0%', '30%'][i % 10]);
-    b.innerHTML = `<span class="n">${locked ? '🔒' : i + 1}</span><span class="st">${'★'.repeat(stars)}${'☆'.repeat(3 - stars)}</span><span class="nm">${lv.name}</span>`;
+    b.innerHTML = `<span class="n">${locked ? '🔒' : i + 1}</span><span class="st">${'★'.repeat(stars)}${'☆'.repeat(3 - stars)}</span><span class="nm">${t(lv.name)}</span>`;
     if (!locked) b.addEventListener('click', () => startLevel(i));
     list.append(b);
   });
-  $('#rush-best').textContent = save.rush ? `Record : ${save.rush}` : 'Pas encore de record';
-  $('#daily-best').textContent = save.daily[today()] ? `Ton score du jour : ${save.daily[today()]}` : 'Nouveau défi aujourd’hui !';
+  $('#rush-best').textContent = save.rush ? t('Record : {n}', { n: save.rush }) : t('Pas encore de record');
+  $('#daily-best').textContent = save.daily[today()] ? t('Ton score du jour : {n}', { n: save.daily[today()] }) : t('Nouveau défi aujourd’hui !');
   $('#opt-sound').textContent = soundOn ? '🔊' : '🔇';
 }
 
@@ -91,15 +97,15 @@ function startLevel(index) {
   current = { kind: 'level', index };
   const lv = LEVELS[index];
   begin(lv, 'level', Date.now());
-  $('#hud-title').textContent = `${index + 1}. ${lv.name}`;
+  $('#hud-title').textContent = `${index + 1}. ${t(lv.name)}`;
   showIntro(lv);
 }
 
 function startRush(daily) {
   current = { kind: 'rush', daily };
   begin(RUSH, 'rush', daily ? 'daily-' + today() : Date.now());
-  $('#hud-title').textContent = daily ? 'Défi du jour' : 'Rush 60 s';
-  flash(daily ? 'Défi du jour : 60 secondes !' : '60 secondes ! Tourne vite !');
+  $('#hud-title').textContent = daily ? t('Défi du jour') : 'Rush 60 s';
+  flash(daily ? t('Défi du jour : 60 secondes !') : t('60 secondes ! Tourne vite !'));
 }
 
 function begin(level, mode, seed) {
@@ -131,11 +137,11 @@ function hud() {
   if (!game) return;
   if (game.mode === 'rush') {
     $('#hud-moves').textContent = Math.ceil(Math.max(0, game.timeLeft));
-    $('#hud-moves-label').textContent = 'secondes';
+    $('#hud-moves-label').textContent = t('secondes');
     $('#hud-moves').classList.toggle('low', game.timeLeft < 10);
   } else {
     $('#hud-moves').textContent = game.movesLeft;
-    $('#hud-moves-label').textContent = 'coups';
+    $('#hud-moves-label').textContent = t('coups');
     $('#hud-moves').classList.toggle('low', game.movesLeft <= 3);
     game.goal().items.forEach((it, i) => {
       const g = game.goalEls?.[i];
@@ -160,15 +166,15 @@ function hud() {
 function showIntro(lv) {
   const parts = game.goal().items.map((it) => {
     if (it.kind === 'sp') return { it, txt: `${it.left}` };
-    if (it.kind === 'ice') return { it, txt: 'toute la glace' };
-    if (it.kind === 'parade') return { it, txt: `${it.left} parades` };
-    if (it.kind === 'rocket') return { it, txt: `${it.left} fusées` };
-    if (it.kind === 'whirl') return { it, txt: `${it.left} tourbillon` };
-    return { it, txt: `${it.left} points` };
+    if (it.kind === 'ice') return { it, txt: t('toute la glace') };
+    if (it.kind === 'parade') return { it, txt: t('{n} parades', { n: it.left }) };
+    if (it.kind === 'rocket') return { it, txt: t('{n} fusées', { n: it.left }) };
+    if (it.kind === 'whirl') return { it, txt: t('{n} tourbillon', { n: it.left }) };
+    return { it, txt: t('{n} points', { n: it.left }) };
   });
   const body = $('#modal .modal-body');
-  body.innerHTML = `<h2>${lv.name}</h2><div class="intro-goals"></div><p class="moves">en <b>${lv.moves}</b> coups</p>
-    <button class="btn primary big" data-act="go">Jouer ▶</button>`;
+  body.innerHTML = `<h2>${t(lv.name)}</h2><div class="intro-goals"></div><p class="moves">${t('en <b>{n}</b> coups', { n: lv.moves })}</p>
+    <button class="btn primary big" data-act="go">${t('Jouer ▶')}</button>`;
   const g = body.querySelector('.intro-goals');
   for (const p of parts) {
     const d = document.createElement('div');
@@ -187,9 +193,9 @@ function end(res) {
     if (current.daily) { if (res.score > (save.daily[today()] || 0)) { save.daily[today()] = res.score; rec = true; } }
     else if (res.score > save.rush) { save.rush = res.score; rec = true; }
     persist();
-    $('#modal .modal-body').innerHTML = `<h2>${rec ? '🏆 Nouveau record !' : 'Temps écoulé !'}</h2>
-      <p class="score">${res.score}</p><p>${current.daily ? 'Défi du jour' : 'Record'} : ${current.daily ? save.daily[today()] : save.rush}</p>
-      <div class="row"><button class="btn primary big" data-act="again">Encore ! ↻</button><button class="btn" data-act="map">Carte</button></div>`;
+    $('#modal .modal-body').innerHTML = `<h2>${rec ? t('🏆 Nouveau record !') : t('Temps écoulé !')}</h2>
+      <p class="score">${res.score}</p><p>${current.daily ? t('Défi du jour : {n}', { n: save.daily[today()] }) : t('Record : {n}', { n: save.rush })}</p>
+      <div class="row"><button class="btn primary big" data-act="again">${t('Encore ! ↻')}</button><button class="btn" data-act="map">${t('Carte')}</button></div>`;
     openModal({ again: () => startRush(current.daily), map: goMap });
     return;
   }
@@ -200,16 +206,16 @@ function end(res) {
     save.best[i] = Math.max(save.best[i] || 0, res.score);
     persist();
     const next = LEVELS[i + 1];
-    $('#modal .modal-body').innerHTML = `<h2>Niveau réussi !</h2>
+    $('#modal .modal-body').innerHTML = `<h2>${t('Niveau réussi !')}</h2>
       <div class="stars">${[1, 2, 3].map((k) => `<span class="${k <= res.stars ? 'on' : ''}" style="animation-delay:${k * 0.25}s">★</span>`).join('')}</div>
       <p class="score">${res.score}</p>
-      <div class="row">${next ? '<button class="btn primary big" data-act="next">Suivant ▶</button>' : ''}
-      <button class="btn" data-act="again">Rejouer ↻</button><button class="btn" data-act="map">Carte</button></div>`;
+      <div class="row">${next ? `<button class="btn primary big" data-act="next">${t('Suivant ▶')}</button>` : ''}
+      <button class="btn" data-act="again">${t('Rejouer ↻')}</button><button class="btn" data-act="map">${t('Carte')}</button></div>`;
     openModal({ next: () => startLevel(i + 1), again: () => startLevel(i), map: goMap });
   } else {
     const left = res.goal.items.filter((x) => x.left > 0);
-    $('#modal .modal-body').innerHTML = `<h2>Presque !</h2><p>Il manquait :</p><div class="intro-goals"></div>
-      <div class="row"><button class="btn primary big" data-act="again">Réessayer ↻</button><button class="btn" data-act="map">Carte</button></div>`;
+    $('#modal .modal-body').innerHTML = `<h2>${t('Presque !')}</h2><p>${t('Il manquait :')}</p><div class="intro-goals"></div>
+      <div class="row"><button class="btn primary big" data-act="again">${t('Réessayer ↻')}</button><button class="btn" data-act="map">${t('Carte')}</button></div>`;
     const g = $('#modal .intro-goals');
     for (const it of left) {
       const d = document.createElement('div'); d.className = 'goal big';

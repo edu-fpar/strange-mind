@@ -1,6 +1,27 @@
 // Application : menu, déroulement des niveaux, voix, sons, réglages.
 import { World } from './engine.js';
 import { LEVELS, SANDBOX } from './levels.js';
+import { t, LANG, setDictionary, translateDom, langToggle, speechLang, voicePrefix } from './i18n.js';
+import EN, { EN_LEVELS } from './i18n-en.js';
+
+// ---------------- langue (français par défaut) ----------------
+setDictionary(EN);
+translateDom();
+langToggle(document.querySelector('#btn-lang'));
+// en anglais : on remplace les textes des niveaux (titre, notion, consignes) par leur version anglaise
+if (LANG === 'en') {
+  for (const lv of [...LEVELS, SANDBOX]) {
+    const en = EN_LEVELS[lv.id];
+    if (!en) continue;
+    if (en.title) lv.title = en.title;
+    if (en.concept) lv.concept = en.concept;
+    (en.steps || []).forEach((es, i) => {
+      const st = lv.steps[i];
+      if (!st || !es) return;
+      for (const k of ['say', 'hint', 'bravo']) if (es[k] != null) st[k] = es[k];
+    });
+  }
+}
 
 const $ = (s) => document.querySelector(s);
 
@@ -44,8 +65,8 @@ function speak(txt) {
   const clean = txt.replace(/\p{Extended_Pictographic}|️|[↺↻⬆️⬇️⬅️➡️]/gu, '').replace(/\s+/g, ' ').trim();
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(clean);
-  u.lang = 'fr-FR';
-  const v = speechSynthesis.getVoices().find((x) => x.lang?.startsWith('fr'));
+  u.lang = speechLang();
+  const v = speechSynthesis.getVoices().find((x) => x.lang?.startsWith(voicePrefix()));
   if (v) u.voice = v;
   u.rate = 0.95; u.pitch = 1.1;
   speechSynthesis.speak(u);
@@ -210,7 +231,7 @@ function onCommit() {
   else if (st.fail?.(game.S)) {
     game.busy = true;
     sound('oops');
-    const msg = 'Oups ! On recommence.';
+    const msg = t('Oups ! On recommence.');
     $('#say').textContent = msg;
     speak(msg);
     setTimeout(() => { if (game?.level.steps[game.step] === st) restartStep(); }, 1400);
@@ -226,7 +247,7 @@ function success(st) {
   const last = game.step === game.level.steps.length - 1;
   sound(last ? 'win' : 'ok');
   burst(last ? 140 : 50);
-  const msg = st.bravo || ['Bravo !', 'Super !', 'Génial !', 'Bien joué !'][Math.floor(Math.random() * 4)];
+  const msg = st.bravo || t(['Bravo !', 'Super !', 'Génial !', 'Bien joué !'][Math.floor(Math.random() * 4)]);
   $('#say').textContent = msg;
   speak(msg);
   const level = game.level;
@@ -243,9 +264,9 @@ function finishLevel() {
   store.set('progress', progress);
   const idx = LEVELS.indexOf(lv);
   const next = LEVELS[idx + 1];
-  openModal(`<div class="win"><div class="big">⭐</div><h2>${lv.title}</h2><p>Niveau réussi !</p>
-    <div class="row">${next ? '<button class="btn primary" data-act="next">Niveau suivant ▶</button>' : ''}
-    <button class="btn" data-act="menu">🏠 Menu</button></div></div>`, {
+  openModal(`<div class="win"><div class="big">⭐</div><h2>${lv.title}</h2><p>${t('Niveau réussi !')}</p>
+    <div class="row">${next ? `<button class="btn primary" data-act="next">${t('Niveau suivant ▶')}</button>` : ''}
+    <button class="btn" data-act="menu">${t('🏠 Menu')}</button></div></div>`, {
     next: () => { closeModal(); startLevel(next); },
     menu: () => { closeModal(); goMenu(); },
   });
@@ -277,14 +298,14 @@ $('#btn-home').addEventListener('click', goMenu);
 $('#btn-speak').addEventListener('click', () => game && speak($('#say').textContent));
 $('#btn-hint').addEventListener('click', () => {
   if (!game) return;
-  const h = game.level.steps[game.step].hint || 'Essaie de glisser ou de tourner les formes !';
+  const h = game.level.steps[game.step].hint || t('Essaie de glisser ou de tourner les formes !');
   $('#say').textContent = '💡 ' + h;
   speak(h);
 });
 $('#btn-reset').addEventListener('click', () => game && !game.busy && restartStep());
 $('#btn-guide').addEventListener('click', () => {
   if (!game) return;
-  openModal(`<h2>🎓 Pour les grands : ${game.level.title}</h2>${game.level.concept}`);
+  openModal(`<h2>${t('🎓 Pour les grands : {title}', { title: game.level.title })}</h2>${game.level.concept}`);
 });
 $('#btn-sandbox').addEventListener('click', () => startLevel(SANDBOX));
 $('#btn-help').addEventListener('click', () => openModal($('#help-template').innerHTML));

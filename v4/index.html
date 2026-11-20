@@ -10,23 +10,24 @@
 <body>
   <section id="home" class="screen" hidden>
     <header class="home-head">
-      <a class="icon-btn" href="../" title="Accueil Strange Mind">🏠</a>
-      <h1>Défis éclair <small>v4</small></h1>
-      <button id="opt-voice" class="icon-btn" title="Voix">🗣️</button>
-      <button id="opt-sound" class="icon-btn" title="Son">🔊</button>
+      <a class="icon-btn" href="../" data-t-title="Accueil Strange Mind" title="Accueil Strange Mind">🏠</a>
+      <h1 data-t>Défis éclair <small>v4</small></h1>
+      <button id="opt-voice" class="icon-btn" data-t-title title="Voix">🗣️</button>
+      <button id="opt-sound" class="icon-btn" data-t-title title="Son">🔊</button>
+      <button id="opt-lang" class="icon-btn"></button>
     </header>
     <div class="modes">
       <button id="btn-rush" class="mode rush"><span class="big">⚡</span><b>Rush 60 s</b><small id="rush-best"></small></button>
-      <button id="btn-daily" class="mode daily"><span class="big">📅</span><b>Défi du jour</b><small id="daily-best"></small></button>
+      <button id="btn-daily" class="mode daily"><span class="big">📅</span><b data-t>Défi du jour</b><small id="daily-best"></small></button>
     </div>
     <div id="games" class="games"></div>
-    <p class="foot">Chaque partie = 10 défis. ★ à 6 bonnes réponses, ★★ à 8, ★★★ sans faute.
+    <p class="foot" data-t="foot">Chaque partie = 10 défis. ★ à 6 bonnes réponses, ★★ à 8, ★★★ sans faute.
       4 réussites d'affilée font monter d'un niveau et gagner une médaille 🥉🥈🥇💎.</p>
   </section>
 
   <section id="play" class="screen" hidden>
     <header id="hud">
-      <button id="btn-home" class="icon-btn" title="Accueil">🏠</button>
+      <button id="btn-home" class="icon-btn" data-t-title title="Accueil">🏠</button>
       <div class="mid"><div id="hud-title" class="title"></div><div id="hud-prog" class="prog"></div></div>
       <div id="hud-streak" class="streak"></div>
       <div class="score"><b id="hud-score">0</b></div>
@@ -35,7 +36,7 @@
       <span id="mascot" class="mascot">🦉</span>
       <p id="say"></p>
       <span id="lvl" class="lvl"></span>
-      <button id="btn-say" class="icon-btn small" title="Réécouter">🔊</button>
+      <button id="btn-say" class="icon-btn small" data-t-title title="Réécouter">🔊</button>
     </div>
     <div class="stage">
       <canvas id="scene"></canvas>

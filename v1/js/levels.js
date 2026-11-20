@@ -342,7 +342,7 @@ export const LEVELS = [
   // ---------------------------------------------------------------- 12
   {
     id: 'bivector', icon: '🌀', title: 'Le tourbillon secret',
-    concept: `<p>Le <b>produit géométrique</b> de deux flèches (vecteurs) a·b = a·b (partie « nombre ») + a∧b (partie « plan orienté », le <b>bivecteur</b>).</p>
+    concept: `<p>Le <b>produit géométrique</b> de deux flèches (vecteurs) ab = a·b (partie « nombre ») + a∧b (partie « plan orienté », le <b>bivecteur</b>).</p>
       <p>Même direction → <b>+1</b> (lapin debout) ; directions opposées → <b>−1</b> (tête en bas) ; perpendiculaires → un <b>tourbillon</b> : le plan orienté e₁e₂, qui tourne dans un sens ou dans l'autre.</p>
       <p>L'ordre compte : <b>e₁e₂ = −e₂e₁</b>. Et ce tourbillon vérifie (e₁e₂)² = −1 : c'est le « i » de Hestenes, qui n'est plus mystérieux mais un <b>morceau de plan qui tourne</b>.</p>`,
     shapes: [

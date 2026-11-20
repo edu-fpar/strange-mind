@@ -44,3 +44,10 @@ js/glyphs.js  dessins des animaux
 Accès direct : `#3` (mini-jeu 3), `#rush`, `#daily`.
 Pour ajouter un mini-jeu : un objet `{ id, name, icon, gen(lvl, R, mode) }` dans `GAMES`
 (le format d'un défi est décrit en tête de `js/games.js`).
+
+## Langues · Licence
+
+Français et anglais : bouton **EN / FR** sur l’écran d’accueil, ou `?lang=en` dans l’adresse.
+English version: **EN** button on the home screen, or add `?lang=en` to the address.
+
+© 2026 François Parlant — [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr) (citer l’auteur · pas d’usage commercial · partage dans les mêmes conditions). Voir [LICENSE](../LICENSE).

@@ -25,7 +25,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 /* ---------- menu ---------- */
 #menu { height: 100dvh; overflow-y: auto; padding: 16px clamp(16px, 4vw, 48px) 32px; }
-.menu-head { text-align: center; margin: 8px 0 18px; }
+.menu-head { position: relative; text-align: center; margin: 8px 0 18px; padding: 0 52px; }
+.lang-btn { position: absolute; top: 0; right: 0; }
 .menu-head h1 { font-size: clamp(30px, 6vw, 54px); margin: 0; letter-spacing: 1px; }
 .menu-head .logo { font-size: .7em; }
 .tagline { color: var(--soft); font-size: clamp(16px, 2.4vw, 21px); margin: 4px 0 0; }

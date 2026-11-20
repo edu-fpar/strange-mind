@@ -2,6 +2,7 @@
 import { Board, scoreStep } from './board.js';
 import { SPECIES, SPECIES_BG, goalStatus, newStats, addStepStats } from './levels.js';
 import { drawGlyph, roundRect } from './glyphs.js';
+import { t as tx } from './i18n.js';
 
 const easeOut = (t) => 1 - Math.pow(1 - t, 3);
 const easeIn = (t) => t * t;
@@ -183,7 +184,7 @@ export class Game {
       cascade++;
     }
     if (!this.board.hasMoves()) {
-      this.addText('On mélange !', this.W / 2, this.H / 2, 34, '#7b2cbf');
+      this.addText(tx('On mélange !'), this.W / 2, this.H / 2, 34, '#7b2cbf');
       this.board.shuffle();
       this.eachTile((t, r, c) => { t.tw = null; this.tween(t, { x: c, y: r, a: t.d * 90 + 360 }, 500); });
       await this.wait(520);
@@ -217,29 +218,29 @@ export class Game {
       const [px, py] = this.cellCenter(tr.c, tr.r);
       if (tr.type === 'rocket') { this.beams.push({ kind: tr.d % 2 === 0 ? 'row' : 'col', idx: tr.d % 2 === 0 ? tr.r : tr.c, t0: performance.now() }); this.sound('rocket'); }
       if (tr.type === 'bomb') { this.beams.push({ kind: 'ring', x: px, y: py, t0: performance.now() }); this.sound('bomb'); }
-      if (tr.type === 'whirl') this.addText('TOURBILLON !', this.W / 2, this.H * 0.4, 46, '#7b2cbf');
+      if (tr.type === 'whirl') this.addText(tx('TOURBILLON !'), this.W / 2, this.H * 0.4, 46, '#7b2cbf');
     }
     const n = res.cleared.length || 1;
     this.addText('+' + pts, sx / n, sy / n, 22 + Math.min(cascade, 5) * 3, '#fff', true);
     this.sound('pop', cascade);
-    if (res.parades) { this.addText(res.parades > 1 ? `Parade ×${res.parades} !` : 'Parade !', this.W / 2, this.oy + this.cs * 0.8, 36, '#ef476f'); this.sound('parade'); }
-    if (res.pairs.length) { this.addText('Bisou ! 💋', this.W / 2, this.oy + this.cs * 1.6, 34, '#ff4d8d'); this.sound('bisou'); }
+    if (res.parades) { this.addText(res.parades > 1 ? tx('Parade ×{n} !', { n: res.parades }) : tx('Parade !'), this.W / 2, this.oy + this.cs * 0.8, 36, '#ef476f'); this.sound('parade'); }
+    if (res.pairs.length) { this.addText(tx('Bisou ! 💋'), this.W / 2, this.oy + this.cs * 1.6, 34, '#ff4d8d'); this.sound('bisou'); }
     for (const cr of res.created) {
-      const label = { rocket: 'Fusée ! 🚀', bomb: 'Bombe ! 💥', whirl: 'Tourbillon ! 🌀' }[cr.special];
+      const label = tx({ rocket: 'Fusée ! 🚀', bomb: 'Bombe ! 💥', whirl: 'Tourbillon ! 🌀' }[cr.special]);
       const [px, py] = this.cellCenter(cr.c, cr.r);
       this.addText(label, px, py - this.cs * 0.6, 26, '#ffd166', true);
     }
     if (COMBO[Math.min(cascade, 6)]) {
       // un seul mot de combo à la fois : le nouveau remplace l'ancien
       this.texts = this.texts.filter((t) => !t.combo);
-      this.addText(COMBO[Math.min(cascade, 6)], this.W / 2, this.H / 2, 40 + cascade * 4, '#ffd166', true);
+      this.addText(tx(COMBO[Math.min(cascade, 6)]), this.W / 2, this.H / 2, 40 + cascade * 4, '#ffd166', true);
       this.texts[this.texts.length - 1].combo = true;
     }
     if (this.mode === 'rush') {
       // seuls les bonus créés rallongent le temps, et de moins en moins
       const fade = Math.max(0.25, 1 - this.elapsed / 120);
       const bonus = Math.round(res.created.reduce((s, c) => s + (c.special === 'whirl' ? 4 : 2), 0) * fade);
-      if (bonus && this.timeLeft > 0) { this.timeLeft += bonus; this.addText(`+${bonus} s`, this.W - 50, this.oy + 20, 26, '#2a9d8f'); }
+      if (bonus && this.timeLeft > 0) { this.timeLeft += bonus; this.addText(tx('+{n} s', { n: bonus }), this.W - 50, this.oy + 20, 26, '#2a9d8f'); }
     }
     this.update();
   }
@@ -275,11 +276,11 @@ export class Game {
     this.over = true;
     this.busy = true;
     this.sound('win');
-    this.addText('Bravo !', this.W / 2, this.H / 2, 64, '#ffd166', true);
+    this.addText(tx('Bravo !'), this.W / 2, this.H / 2, 64, '#ffd166', true);
     await this.waitRaw(900);
     // feu d'artifice : chaque coup restant devient une fusée
     if (this.movesLeft > 0) {
-      this.addText("Feu d'artifice !", this.W / 2, this.H * 0.35, 44, '#ef476f', true);
+      this.addText(tx("Feu d'artifice !"), this.W / 2, this.H * 0.35, 44, '#ef476f', true);
       const cells = [];
       const b = this.board;
       while (this.movesLeft > 0) {

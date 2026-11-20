@@ -101,3 +101,10 @@ Options d'une forme : `tumble` (`'both'`, `'h'`, `'v'`, `'none'`), `twist` (bool
 État lisible dans `S` : `S.dir(id)` (angle 0…359 de la face visible, sens anti-horaire),
 `S.glyph(id)`, `S.val(id)` (complexe `[re, im]`), `S.real(id)`,
 `S.shape(id).twists / turnSum / history / startDir`, `S.mem` (mémoire libre du niveau).
+
+## Langues · Licence
+
+Français et anglais : bouton **EN / FR** sur l’écran d’accueil, ou `?lang=en` dans l’adresse.
+English version: **EN** button on the home screen, or add `?lang=en` to the address.
+
+© 2026 François Parlant — [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr) (citer l’auteur · pas d’usage commercial · partage dans les mêmes conditions). Voir [LICENSE](../LICENSE).

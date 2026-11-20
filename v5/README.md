@@ -45,3 +45,10 @@ tools/check.mjs  node v5/tools/check.mjs : vérifie que chaque relation apparaî
 
 Ajouter une relation : un objet dans `RELATIONS` (`kind`, `ordered`, `test`, `plant`, `example`, `pts`),
 puis l'ajouter à un chapitre. Accès direct : `#5` (chapitre 5), `#libre`.
+
+## Langues · Licence
+
+Français et anglais : bouton **EN / FR** sur l’écran d’accueil, ou `?lang=en` dans l’adresse.
+English version: **EN** button on the home screen, or add `?lang=en` to the address.
+
+© 2026 François Parlant — [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr) (citer l’auteur · pas d’usage commercial · partage dans les mêmes conditions). Voir [LICENSE](../LICENSE).

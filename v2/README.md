@@ -61,3 +61,10 @@ js/game.js     rendu en vue plongeante (Canvas 2D), animations, gestes, annuler,
 js/main.js     carte des mondes, HUD, patron du cube, sons, sauvegarde
 js/glyphs.js   dessins des animaux
 ```
+
+## Langues · Licence
+
+Français et anglais : bouton **EN / FR** sur l’écran d’accueil, ou `?lang=en` dans l’adresse.
+English version: **EN** button on the home screen, or add `?lang=en` to the address.
+
+© 2026 François Parlant — [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr) (citer l’auteur · pas d’usage commercial · partage dans les mêmes conditions). Voir [LICENSE](../LICENSE).

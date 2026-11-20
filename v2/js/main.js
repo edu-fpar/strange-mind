@@ -2,6 +2,12 @@
 import { Game } from './game.js';
 import { LEVELS, WORLDS } from './levels.js';
 import { drawGlyph } from './glyphs.js';
+import { t, setDictionary, translateDom, langToggle } from './i18n.js';
+import EN from './i18n-en.js';
+
+setDictionary(EN);
+translateDom();
+langToggle(document.querySelector('#btn-lang'));
 
 const $ = (s) => document.querySelector(s);
 const store = {
@@ -48,7 +54,7 @@ function renderMap() {
     const sec = document.createElement('section');
     sec.className = 'world';
     sec.style.setProperty('--wc', w.color);
-    sec.innerHTML = `<h2>${w.icon} ${w.name}</h2><div class="nodes"></div>`;
+    sec.innerHTML = `<h2>${w.icon} ${t(w.name)}</h2><div class="nodes"></div>`;
     const nodes = sec.querySelector('.nodes');
     LEVELS.forEach((lv, i) => {
       if (lv.world !== wi) return;
@@ -56,7 +62,7 @@ function renderMap() {
       const locked = i > 0 && !save.stars[i - 1];
       const b = document.createElement('button');
       b.className = 'node' + (locked ? ' locked' : '') + (!locked && !st ? ' next' : '');
-      b.innerHTML = `<span class="n">${locked ? '🔒' : i + 1}</span><span class="st">${'★'.repeat(st)}${'☆'.repeat(3 - st)}</span><span class="nm">${lv.name}</span>`;
+      b.innerHTML = `<span class="n">${locked ? '🔒' : i + 1}</span><span class="st">${'★'.repeat(st)}${'☆'.repeat(3 - st)}</span><span class="nm">${t(lv.name)}</span>`;
       if (!locked) b.addEventListener('click', () => start(i));
       nodes.append(b);
     });
@@ -74,7 +80,7 @@ function start(i) {
   show('play');
   $('#modal').hidden = true;
   const def = LEVELS[i];
-  $('#hud-title').textContent = `${i + 1}. ${def.name}`;
+  $('#hud-title').textContent = `${i + 1}. ${t(def.name)}`;
   game = new Game($('#board'), def, { sound, onMove: hud, onWin: win });
   hud();
 }
@@ -123,12 +129,12 @@ function win(g) {
   save.stars[current] = Math.max(save.stars[current] || 0, st);
   store.set('save', save);
   const next = LEVELS[current + 1];
-  const fishMsg = g.level.fish.length ? (g.state.fish.every(Boolean) ? 'Poisson doré trouvé ! 🐟' : 'Un poisson doré se cache ici… 🐟') : '';
-  $('#modal .modal-body').innerHTML = `<h2>Bravo !</h2>
+  const fishMsg = g.level.fish.length ? (g.state.fish.every(Boolean) ? t('Poisson doré trouvé ! 🐟') : t('Un poisson doré se cache ici… 🐟')) : '';
+  $('#modal .modal-body').innerHTML = `<h2>${t('Bravo !')}</h2>
     <div class="stars">${[1, 2, 3].map((k) => `<span class="${k <= st ? 'on' : ''}" style="animation-delay:${k * 0.25}s">★</span>`).join('')}</div>
-    <p>${g.state.moves} coups · le moins possible : ${g.par}</p>${fishMsg ? `<p>${fishMsg}</p>` : ''}
-    <div class="row">${next ? '<button class="btn primary big" data-act="next">Suivant ▶</button>' : ''}
-    <button class="btn" data-act="again">Rejouer ↻</button><button class="btn" data-act="map">Carte</button></div>`;
+    <p>${t('{n} coups · le moins possible : {par}', { n: g.state.moves, par: g.par })}</p>${fishMsg ? `<p>${fishMsg}</p>` : ''}
+    <div class="row">${next ? `<button class="btn primary big" data-act="next">${t('Suivant ▶')}</button>` : ''}
+    <button class="btn" data-act="again">${t('Rejouer ↻')}</button><button class="btn" data-act="map">${t('Carte')}</button></div>`;
   openModal({ next: () => start(current + 1), again: () => start(current), map: goMap });
 }
 

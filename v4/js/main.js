@@ -1,5 +1,10 @@
 // Strange Mind v4 : défis éclair. Accueil, séances de 10 défis, Rush 60 s, défi du jour.
 import { GAMES, makeR } from './games.js';
+import { t, setDictionary, translateDom, langToggle, speechLang, voicePrefix } from './i18n.js';
+import EN from './i18n-en.js';
+
+setDictionary(EN);
+translateDom();
 
 const $ = (s) => document.querySelector(s);
 const store = {
@@ -40,8 +45,8 @@ function speak(txt) {
   if (!prefs.voice || !('speechSynthesis' in window)) return;
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(txt.replace(/\p{Extended_Pictographic}|️/gu, ''));
-  u.lang = 'fr-FR'; u.rate = 1; u.pitch = 1.1;
-  const v = speechSynthesis.getVoices().find((x) => x.lang?.startsWith('fr'));
+  u.lang = speechLang(); u.rate = 1; u.pitch = 1.1;
+  const v = speechSynthesis.getVoices().find((x) => x.lang?.startsWith(voicePrefix()));
   if (v) u.voice = v;
   speechSynthesis.speak(u);
 }
@@ -78,13 +83,13 @@ function renderHome() {
     const s = gsave(g.id), lock = !unlocked(i);
     const b = document.createElement('button');
     b.className = 'game-card' + (lock ? ' locked' : '') + (!lock && !s.stars ? ' next' : '');
-    b.innerHTML = `<span class="num">${i + 1}</span><span class="icon">${lock ? '🔒' : g.icon}</span><span class="name">${g.name}</span>
+    b.innerHTML = `<span class="num">${i + 1}</span><span class="icon">${lock ? '🔒' : g.icon}</span><span class="name">${t(g.name)}</span>
       <span class="meta">${'★'.repeat(s.stars)}${'☆'.repeat(3 - s.stars)} <span class="medal">${MEDALS[s.medal]}</span></span>`;
     if (!lock) b.addEventListener('click', () => startSession({ kind: 'game', ids: [g.id] }));
     box.append(b);
   });
-  $('#rush-best').textContent = save.rush ? `Record : ${save.rush}` : 'Bats ton record !';
-  $('#daily-best').textContent = save.daily[today()] != null ? `Aujourd’hui : ${save.daily[today()]}/10` : 'Nouveau défi !';
+  $('#rush-best').textContent = save.rush ? t('Record : {n}', { n: save.rush }) : t('Bats ton record !');
+  $('#daily-best').textContent = save.daily[today()] != null ? t('Aujourd’hui : {n}/10', { n: save.daily[today()] }) : t('Nouveau défi !');
   $('#opt-sound').textContent = prefs.sound ? '🔊' : '🔇';
   $('#opt-voice').textContent = prefs.voice ? '🗣️' : '🤐';
 }
@@ -108,7 +113,7 @@ function startSession(cfg) {
   };
   show('play');
   $('#hud').classList.toggle('rush', rush);
-  $('#hud-title').textContent = rush ? '⚡ Rush' : daily ? '📅 Défi du jour' : GAMES.find((g) => g.id === ids[0]).name;
+  $('#hud-title').textContent = rush ? '⚡ Rush' : daily ? t('📅 Défi du jour') : t(GAMES.find((g) => g.id === ids[0]).name);
   hud();
   nextRound();
   S.last = performance.now();
@@ -133,6 +138,7 @@ function nextRound() {
   const lvl = S.lvl[id];
   const mode = S.forceMode || (S.R.f() < 0.5 ? 'faire' : 'prevoir');
   const round = game.gen(lvl, S.R, mode);
+  round.prompt = t(round.prompt);
   R = { ...round, id, game, lvl, actions: 0, t0: performance.now(), anim: null, done: false, picked: new Set() };
   R.limit = S.rush ? Math.max(4, 10 - S.streak * 0.35) : Infinity;
   $('#say').textContent = R.prompt;
@@ -231,14 +237,14 @@ function finish(ok, picked) {
     S.score += pts;
     if (S.rush && S.streak % 3 === 0) S.timeLeft += 2; // +2 s toutes les 3 bonnes réponses d’affilée
     S.runOk[id] = (S.runOk[id] || 0) + 1; S.runBad[id] = 0;
-    let msg = perfect ? 'Parfait !' : CHEERS[Math.floor(Math.random() * CHEERS.length)];
-    if ([3, 5, 10, 15, 20].includes(S.streak)) { msg = `Série de ${S.streak} ! 🔥`; burst(S.streak * 6); }
+    let msg = t(perfect ? 'Parfait !' : CHEERS[Math.floor(Math.random() * CHEERS.length)]);
+    if ([3, 5, 10, 15, 20].includes(S.streak)) { msg = t('Série de {n} ! 🔥', { n: S.streak }); burst(S.streak * 6); }
     // 4 réussites d'affilée à un niveau : il est maîtrisé (médaille) et on monte
     let up = false;
     if (S.runOk[id] >= 4) {
       S.maxLvl[id] = Math.max(S.maxLvl[id] || 0, S.lvl[id]);
       S.runOk[id] = 0;
-      if (S.lvl[id] < 4) { S.lvl[id]++; up = true; msg = 'Niveau supérieur ! ⭐'; sound('up'); }
+      if (S.lvl[id] < 4) { S.lvl[id]++; up = true; msg = t('Niveau supérieur ! ⭐'); sound('up'); }
     }
     if (!up) sound(perfect ? 'perfect' : 'ok', S.streak);
     feedback(true, `${msg}  +${pts}`);
@@ -248,7 +254,7 @@ function finish(ok, picked) {
     S.runBad[id] = (S.runBad[id] || 0) + 1; S.runOk[id] = 0;
     if (S.runBad[id] >= 2 && S.lvl[id] > 1) { S.lvl[id]--; S.runBad[id] = 0; }
     sound('bad');
-    feedback(false, R.options ? 'Presque ! Regarde la bonne réponse.' : 'Presque ! Regarde.');
+    feedback(false, t(R.options ? 'Presque ! Regarde la bonne réponse.' : 'Presque ! Regarde.'));
     $('#mascot').textContent = '🤔';
   }
   hud();
@@ -294,12 +300,12 @@ function endSession() {
   const s = S; S = null; R = null;
   speechSynthesis?.cancel?.();
   sound('end');
-  let title = 'Bravo !', extra = '';
+  let title = t('Bravo !'), extra = '';
   if (s.rush) {
     const rec = s.score > save.rush;
     if (rec) save.rush = s.score;
-    title = rec ? '🏆 Nouveau record !' : 'Temps écoulé !';
-    extra = `<p>${s.correct} bonnes réponses · meilleure série ${s.best}</p>`;
+    title = t(rec ? '🏆 Nouveau record !' : 'Temps écoulé !');
+    extra = `<p>${t('{n} bonnes réponses · meilleure série {b}', { n: s.correct, b: s.best })}</p>`;
   } else {
     const stars = s.correct >= 10 ? 3 : s.correct >= 8 ? 2 : s.correct >= 6 ? 1 : 0;
     let medalTxt = '';
@@ -310,16 +316,16 @@ function endSession() {
       g.lvl = s.lvl[s.ids[0]];
       const before = g.medal;
       if (stars > 0) g.medal = Math.max(g.medal, s.maxLvl[s.ids[0]] || 0);
-      if (g.medal > before) medalTxt = `<p class="medal-up">Nouvelle médaille : ${MEDALS[g.medal]}</p>`;
+      if (g.medal > before) medalTxt = `<p class="medal-up">${t('Nouvelle médaille : {m}', { m: MEDALS[g.medal] })}</p>`;
     }
-    title = stars ? 'Bravo !' : 'On continue !';
+    title = t(stars ? 'Bravo !' : 'On continue !');
     extra = `<div class="stars">${[1, 2, 3].map((k) => `<span class="${k <= stars ? 'on' : ''}" style="animation-delay:${k * 0.2}s">★</span>`).join('')}</div>
-      <p>${s.correct} / 10 · meilleure série 🔥 ${s.best}</p>` + medalTxt;
+      <p>${t('{n} / 10 · meilleure série 🔥 {b}', { n: s.correct, b: s.best })}</p>` + medalTxt;
     if (stars >= 2) burst(120);
   }
   persist();
   $('#modal .modal-body').innerHTML = `<h2>${title}</h2><p class="score">${s.score}</p>${extra}
-    <div class="row"><button class="btn primary big" data-act="again">Encore ! ↻</button><button class="btn" data-act="home">Accueil</button></div>`;
+    <div class="row"><button class="btn primary big" data-act="again">${t('Encore ! ↻')}</button><button class="btn" data-act="home">${t('Accueil')}</button></div>`;
   $('#modal').hidden = false;
   $('#modal [data-act=again]').onclick = () => { $('#modal').hidden = true; startSession({ kind: s.kind, ids: s.kind === 'game' ? s.ids : undefined }); };
   $('#modal [data-act=home]').onclick = goHome;
@@ -335,6 +341,7 @@ function goHome() {
 
 // ---------------- boutons ----------------
 $('#btn-home').addEventListener('click', goHome);
+langToggle($('#opt-lang'));
 $('#btn-say').addEventListener('click', () => R && speak(R.prompt));
 $('#btn-rush').addEventListener('click', () => startSession({ kind: 'rush' }));
 $('#btn-daily').addEventListener('click', () => startSession({ kind: 'daily' }));

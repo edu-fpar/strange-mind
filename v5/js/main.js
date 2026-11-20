@@ -1,6 +1,11 @@
 // Strange Mind v5 : la chasse aux relations. Accueil, chapitres de 3 plateaux, chasse libre.
 import { CHAPTERS, RELATIONS, makeR } from './relations.js';
 import { Hunt, drawTile } from './hunt.js';
+import { t, setDictionary, translateDom, langToggle, speechLang, voicePrefix } from './i18n.js';
+import EN from './i18n-en.js';
+
+setDictionary(EN);
+translateDom();
 
 const $ = (s) => document.querySelector(s);
 const store = {
@@ -38,8 +43,8 @@ function speak(txt) {
   if (!prefs.voice || !('speechSynthesis' in window)) return;
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(txt.replace(/\p{Extended_Pictographic}|️|[↺↻×]/gu, ''));
-  u.lang = 'fr-FR'; u.pitch = 1.1;
-  const v = speechSynthesis.getVoices().find((x) => x.lang?.startsWith('fr'));
+  u.lang = speechLang(); u.pitch = 1.1;
+  const v = speechSynthesis.getVoices().find((x) => x.lang?.startsWith(voicePrefix()));
   if (v) u.voice = v;
   speechSynthesis.speak(u);
 }
@@ -56,12 +61,12 @@ function renderHome() {
     const b = document.createElement('button');
     b.className = 'chap' + (lock ? ' locked' : '') + (!lock && !st ? ' next' : '');
     const pts = ch.rels.map((id) => RELATIONS[id].pts);
-    b.innerHTML = `<span class="num">${i + 1}</span><span class="icon">${lock ? '🔒' : ch.icon}</span><span class="name">${ch.name}</span>
-      <span class="pts">jusqu’à ${Math.max(...pts)} pts</span><span class="st">${'★'.repeat(st)}${'☆'.repeat(3 - st)}</span>`;
+    b.innerHTML = `<span class="num">${i + 1}</span><span class="icon">${lock ? '🔒' : ch.icon}</span><span class="name">${t(ch.name)}</span>
+      <span class="pts">${t('jusqu’à {n} pts', { n: Math.max(...pts) })}</span><span class="st">${'★'.repeat(st)}${'☆'.repeat(3 - st)}</span>`;
     if (!lock) b.addEventListener('click', () => startChapter(i));
     box.append(b);
   });
-  $('#free-best').textContent = save.free ? `Record : ${save.free}` : 'Toutes les relations débloquées';
+  $('#free-best').textContent = save.free ? t('Record : {n}', { n: save.free }) : t('Toutes les relations débloquées');
   $('#opt-sound').textContent = prefs.sound ? '🔊' : '🔇';
   $('#opt-voice').textContent = prefs.voice ? '🗣️' : '🤐';
 }
@@ -90,27 +95,27 @@ function nextBoard() {
   const ch = G.mode === 'chapter' ? CHAPTERS[G.chIndex] : pool[Math.floor(Math.random() * pool.length)];
   G.ch = ch;
   G.boardNo++;
-  $('#hud-title').textContent = G.mode === 'chapter' ? `${ch.icon} ${ch.name} · plateau ${G.boardNo}/${BOARDS}` : `⏱️ Chasse libre · ${ch.name}`;
+  $('#hud-title').textContent = G.mode === 'chapter' ? t('{icon} {name} · plateau {n}/{total}', { icon: ch.icon, name: t(ch.name), n: G.boardNo, total: BOARDS }) : t('⏱️ Chasse libre · {name}', { name: t(ch.name) });
   G.hunt = new Hunt($('#board'), ch, makeR(Math.random), {
     sound,
     onFind: (id, pts, combo) => {
       G.score += pts;
-      say(combo >= 3 ? `Combo ×${combo} ! 🔥` : ['Trouvé !', 'Bien vu !', 'Oui !', 'Bravo !'][Math.floor(Math.random() * 4)]);
+      say(combo >= 3 ? t('Combo ×{n} ! 🔥', { n: combo }) : t(['Trouvé !', 'Bien vu !', 'Oui !', 'Bravo !'][Math.floor(Math.random() * 4)]));
       if (G.mode === 'free') G.time += 1;
       refresh();
     },
     onMiss: (kind) => {
-      if (kind === 'reverse') say('Presque ! Essaie dans l’autre sens ↔', true);
-      else if (kind === 'already') say('Celui-là, tu l’as déjà trouvé !');
-      else say('Non… regarde bien le modèle.');
+      if (kind === 'reverse') say(t('Presque ! Essaie dans l’autre sens ↔'), true);
+      else if (kind === 'already') say(t('Celui-là, tu l’as déjà trouvé !'));
+      else say(t('Non… regarde bien le modèle.'));
       refresh();
     },
     onDone: boardDone,
   });
   buildCards();
   refresh();
-  const names = ch.rels.map((id) => RELATIONS[id].name).join(', ');
-  say(G.boardNo === 1 && G.mode === 'chapter' ? `Trouve TOUS les endroits comme les modèles : ${names}` : 'Trouve-les tous !', true);
+  const names = ch.rels.map((id) => t(RELATIONS[id].name)).join(', ');
+  say(G.boardNo === 1 && G.mode === 'chapter' ? t('Trouve TOUS les endroits comme les modèles : {names}', { names }) : t('Trouve-les tous !'), true);
 }
 
 function say(txt, voice = false) {
@@ -127,7 +132,7 @@ function buildCards() {
     const card = document.createElement('div');
     card.className = 'card';
     card.style.setProperty('--rc', rel.color);
-    card.innerHTML = `<canvas></canvas><div class="info"><b>${rel.name}</b><span class="pts">${rel.pts} pts</span><div class="dots"></div></div>`;
+    card.innerHTML = `<canvas></canvas><div class="info"><b>${t(rel.name)}</b><span class="pts">${rel.pts} pts</span><div class="dots"></div></div>`;
     box.append(card);
     return { id, rel, card, canvas: card.querySelector('canvas'), dots: card.querySelector('.dots') };
   });
@@ -181,7 +186,7 @@ function boardDone() {
   if (G.mode === 'free') {
     G.time += 15;
     G.score += 100;
-    say('Plateau terminé ! +15 s', true);
+    say(t('Plateau terminé ! +15 s'), true);
     setTimeout(() => G && nextBoard(), 900);
     return;
   }
@@ -192,18 +197,18 @@ function boardDone() {
   const last = G.boardNo >= BOARDS;
   const body = $('#modal .modal-body');
   if (!last) {
-    body.innerHTML = `<h2>Plateau réussi !</h2>${starsHtml(st)}<p>${h.mistakes ? `${h.mistakes} erreur${h.mistakes > 1 ? 's' : ''}` : 'Aucune erreur !'} · bonus +${bonus}</p>
-      <div class="row"><button class="btn primary big" data-act="next">Plateau suivant ▶</button></div>`;
+    body.innerHTML = `<h2>${t('Plateau réussi !')}</h2>${starsHtml(st)}<p>${h.mistakes ? t(h.mistakes > 1 ? '{n} erreurs' : '{n} erreur', { n: h.mistakes }) : t('Aucune erreur !')} · bonus +${bonus}</p>
+      <div class="row"><button class="btn primary big" data-act="next">${t('Plateau suivant ▶')}</button></div>`;
   } else {
     const avg = Math.round(G.stars.reduce((a, b) => a + b, 0) / G.stars.length);
     const id = CHAPTERS[G.chIndex].id;
     save.stars[id] = Math.max(save.stars[id] || 0, avg);
     persist();
     const nxt = CHAPTERS[G.chIndex + 1];
-    body.innerHTML = `<h2>Chapitre réussi !</h2>${starsHtml(avg)}<p class="score">${G.score}</p>
-      ${nxt ? `<p>Nouveau chapitre : <b>${nxt.icon} ${nxt.name}</b> (relations à ${Math.max(...nxt.rels.map((r) => RELATIONS[r].pts))} pts)</p>` : '<p>Tu as trouvé toutes les relations !</p>'}
-      <div class="row">${nxt ? '<button class="btn primary big" data-act="nextch">Chapitre suivant ▶</button>' : ''}
-      <button class="btn" data-act="again">Rejouer ↻</button><button class="btn" data-act="home">Accueil</button></div>`;
+    body.innerHTML = `<h2>${t('Chapitre réussi !')}</h2>${starsHtml(avg)}<p class="score">${G.score}</p>
+      ${nxt ? `<p>${t('Nouveau chapitre : <b>{icon} {name}</b> (relations à {pts} pts)', { icon: nxt.icon, name: t(nxt.name), pts: Math.max(...nxt.rels.map((r) => RELATIONS[r].pts)) })}</p>` : `<p>${t('Tu as trouvé toutes les relations !')}</p>`}
+      <div class="row">${nxt ? `<button class="btn primary big" data-act="nextch">${t('Chapitre suivant ▶')}</button>` : ''}
+      <button class="btn" data-act="again">${t('Rejouer ↻')}</button><button class="btn" data-act="home">${t('Accueil')}</button></div>`;
   }
   $('#modal').hidden = false;
   body.querySelector('[data-act=next]')?.addEventListener('click', nextBoard);
@@ -228,8 +233,8 @@ function endFree() {
   const rec = score > save.free;
   if (rec) save.free = score;
   persist();
-  $('#modal .modal-body').innerHTML = `<h2>${rec ? '🏆 Nouveau record !' : 'Temps écoulé !'}</h2><p class="score">${score}</p><p>Record : ${save.free}</p>
-    <div class="row"><button class="btn primary big" data-act="again">Encore ↻</button><button class="btn" data-act="home">Accueil</button></div>`;
+  $('#modal .modal-body').innerHTML = `<h2>${t(rec ? '🏆 Nouveau record !' : 'Temps écoulé !')}</h2><p class="score">${score}</p><p>${t('Record : {n}', { n: save.free })}</p>
+    <div class="row"><button class="btn primary big" data-act="again">${t('Encore ↻')}</button><button class="btn" data-act="home">${t('Accueil')}</button></div>`;
   $('#modal').hidden = false;
   $('#modal [data-act=again]').onclick = startFree;
   $('#modal [data-act=home]').onclick = goHome;
@@ -266,7 +271,8 @@ function stepConf() {
 
 // ---------------- boutons ----------------
 $('#btn-home').addEventListener('click', goHome);
-$('#btn-hint').addEventListener('click', () => { if (G?.hunt && !G.hunt.done && G.hunt.showHint()) { say('Regarde la case qui brille… et cherche autour !'); refresh(); } });
+langToggle($('#opt-lang'));
+$('#btn-hint').addEventListener('click', () => { if (G?.hunt && !G.hunt.done && G.hunt.showHint()) { say(t('Regarde la case qui brille… et cherche autour !')); refresh(); } });
 $('#btn-free').addEventListener('click', startFree);
 $('#opt-sound').addEventListener('click', () => { prefs.sound = !prefs.sound; store.set('prefs', prefs); renderHome(); });
 $('#opt-voice').addEventListener('click', () => { prefs.voice = !prefs.voice; store.set('prefs', prefs); renderHome(); });
