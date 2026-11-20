@@ -13,6 +13,7 @@ choisir une version :
 | v2 · Les cubes qui roulent | [`v2/`](v2/) | jeu de réflexion : le dessus du cube garde la mémoire du chemin (l'ordre des rotations compte) |
 | v3 · Les tourbillons | [`v3/`](v3/) | jeu rapide à la Candy Crush : on fait tourner des carrés d'animaux, Rush 60 s, défi du jour |
 | v4 · Les défis éclair | [`v4/`](v4/) | les 9 situations de la v1 en défis de quelques secondes, « faire » et « prévoir », séries, médailles, Rush |
+| v5 · La chasse aux relations | [`v5/`](v5/) | le jeu montre une relation, on la retrouve partout sur le plateau ; relations de plus en plus riches (rotation, inverse, composition, miroir, bivecteur, matrices) |
 
 Chaque dossier a son README. Aucune dépendance : HTML, JavaScript (modules ES) et Canvas 2D.
 Idées mises de côté : [`idees/`](idees/).
