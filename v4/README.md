@@ -1,6 +1,6 @@
 # Strange Mind v4 : défis éclair (prototype)
 
-Les situations de la v1 (dauphin, lapins, machine, jardin, miroirs, tourbillon) jouées au rythme d'un
+Les situations de la [v1](https://fxpar.github.io/kid-games/strange-mind/v1/) (dauphin, lapins, machine, jardin, miroirs, tourbillon) jouées au rythme d'un
 jeu casual : des défis de quelques secondes, à l'infini, avec séries, niveaux et médailles.
 Chaque bonne réponse **est** la notion : on ne peut pas réussir sans s'en servir.
 

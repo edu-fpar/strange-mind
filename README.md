@@ -1,29 +1,68 @@
-# Strange Mind
+# Strange Mind · Défis éclair
 
 > 🇬🇧 English: every game has an English version (EN button, or add `?lang=en` to the address). See [the English summary](#english) below.
 
-Des formes qui sont des volumes, des animaux qui tournent : des jeux pour construire chez les enfants
-(dès 5 ans) des intuitions sur les rotations, les nombres complexes, les matrices et l'algèbre
-géométrique, sans jamais écrire une formule.
+**Des défis de quelques secondes pour construire chez les enfants (dès 5 ans) des intuitions sur les rotations,
+les nombres complexes, les matrices et l'algèbre géométrique, sans jamais écrire une formule.**
 
-Ouvrir `index.html` (via un serveur web : `node tools/serve.mjs` puis http://localhost:8765/) pour
-choisir une version :
+### ▶ [Jouer : edu-fpar.github.io/strange-mind/v4](https://edu-fpar.github.io/strange-mind/v4/) · [La grille qui transforme](https://edu-fpar.github.io/strange-mind/v4/#6)
 
-| Version | Dossier | Idée |
-|---|---|---|
-| v1 · Les leçons | [`v1/`](v1/) | 12 niveaux guidés, consignes lues à voix haute : de i à l'algèbre géométrique de Hestenes |
-| v2 · Les cubes qui roulent | [`v2/`](v2/) | jeu de réflexion : le dessus du cube garde la mémoire du chemin (l'ordre des rotations compte) |
-| v3 · Les tourbillons | [`v3/`](v3/) | jeu rapide à la Candy Crush : on fait tourner des carrés d'animaux, Rush 60 s, défi du jour |
-| v4 · Les défis éclair | [`v4/`](v4/) | les 9 situations de la v1 en défis de quelques secondes, « faire » et « prévoir », séries, médailles, Rush |
-| v5 · La chasse aux relations | [`v5/`](v5/) | le jeu montre une relation, on la retrouve partout sur le plateau ; relations de plus en plus riches (rotation, inverse, composition, miroir, bivecteur, matrices) |
+![La grille qui transforme : on règle une grille 2×2 de tuiles (lapins, nuages) pour refaire le jardin en pointillés](screenshots/changing-grid-fr.png)
 
-Chaque dossier a son README. Aucune dépendance : HTML, JavaScript (modules ES) et Canvas 2D.
-Idées mises de côté : [`idees/`](idees/).
+Chaque bonne réponse **est** la notion : on ne peut pas réussir sans s'en servir.
 
-## Langues
+## Les 9 mini-jeux (accès direct : `v4/#1` à `v4/#9`)
 
-Chaque jeu existe en français et en anglais : bouton EN / FR sur l'écran d'accueil de chaque version,
-ou `?lang=en` / `?lang=fr` dans l'adresse (le choix est retenu pour toutes les versions).
+| # | Mini-jeu | Faire | Prévoir | Notion |
+|---|---|---|---|---|
+| 1 | Le dauphin a faim | tourner le dauphin vers le poisson | où regardera-t-il après ↺↺ ? | quart de tour = ×i |
+| 2 | Le tour à l'envers | un seul bouton ↺ : le bon nombre de tours | « ↺↺↺ fait pareil que… ? » | i³ = −i, inverse |
+| 3 | Lapins debout, tête en bas | retourner les lapins pour amener la coccinelle au drapeau | où va la coccinelle ? | +1, 0, −1, opposés |
+| 4 | La machine à tourner | A × ? = cible | A × B = ? | multiplier = additionner les angles |
+| 5 | La racine magique | ? × ? = cible (puis trouver les DEUX) | A × A = ? | √i, deux solutions |
+| 6 | La grille qui transforme | régler la grille pour refaire le jardin | quel jardin sort de la grille ? | matrice = transformation |
+| 7 | Le jardin qui disparaît | — | normal 🙂, miroir 🪞 ou écrasé 💨 ? | signe du déterminant |
+| 8 | Deux miroirs font un tour | tourner 1 puis 2 miroirs | que voit-on dans le(s) miroir(s) ? | réflexions, 2 miroirs = rotation |
+| 9 | Le tourbillon secret | tourner la flèche verte pour obtenir le résultat | flèche × flèche = ? | produit géométrique, bivecteur, ab = −ba |
+
+Chaque mini-jeu a **4 niveaux** de difficulté (par exemple pour le dauphin : 1 quart de tour,
+puis 2, puis des tours mélangés, puis l'octogone par huitièmes).
+
+## Ce qui encourage
+
+- **Prévoir puis voir** : après la réponse, l'animation montre ce qui se passe vraiment.
+- **Erreur douce** : on montre la bonne réponse, seule la série est perdue.
+- **Séries** 🔥 avec sons qui montent, confettis à 3, 5, 10…
+- **Difficulté qui s'adapte** : 4 réussites d'affilée → niveau supérieur ; 2 erreurs → on redescend.
+- **Étoiles** par partie de 10 défis (6, 8, 10 bonnes réponses) ; une ★ débloque le mini-jeu suivant.
+- **Médailles** 🥉🥈🥇💎 : le plus haut niveau maîtrisé (4 réussites d'affilée à ce niveau).
+- **Rush 60 s** (tous les mini-jeux débloqués, de plus en plus vite, +2 s toutes les 3 bonnes réponses d'affilée) et **défi du jour** (le même pour tout le monde).
+- Consignes lues à voix haute (🗣️ pour couper), aucun texte nécessaire pour jouer.
+
+## Code
+
+```
+v4/js/games.js   les 9 mini-jeux : chacun fabrique des défis à l'infini (gen(niveau, hasard, mode))
+v4/js/draw.js    dessins partagés (mer, droite des nombres, tuiles-nombres, jardin, grille)
+v4/js/main.js    accueil, séances, séries, niveaux, Rush, défi du jour, sons, voix, sauvegarde
+v4/js/glyphs.js  dessins des animaux
+```
+
+Accès direct : `#3` (mini-jeu 3), `#rush`, `#daily`.
+Pour ajouter un mini-jeu : un objet `{ id, name, icon, gen(lvl, R, mode) }` dans `GAMES`
+(le format d'un défi est décrit en tête de `js/games.js`).
+
+## Lancer en local
+
+Aucune dépendance : HTML, JavaScript (modules ES) et Canvas 2D. `node tools/serve.mjs` puis
+http://localhost:8765/ (un double-clic sur `index.html` ne suffit pas : les modules ES demandent un serveur).
+
+## Les autres versions
+
+Les prototypes qui ont mené aux défis éclair (v1 · leçons guidées, v2 · cubes qui roulent, v3 · tourbillons,
+v5 · chasse aux relations) sont sur [fxpar/kid-games](https://github.com/fxpar/kid-games)
+([jouer](https://fxpar.github.io/kid-games/strange-mind/)). Leur historique reste dans ce dépôt, avant le
+commit qui les a déplacés.
 
 ## Licence
 
@@ -35,19 +74,18 @@ licence. Voir [LICENSE](LICENSE).
 
 ## English
 
-Strange Mind is a set of games for children (age 5+) to build intuitions about rotations, complex numbers,
-matrices and Hestenes' geometric algebra, without ever writing a formula. Open `index.html` through a web
-server (`node tools/serve.mjs`, then http://localhost:8765/) and pick a version:
+**Strange Mind · Quick challenges**: few-second challenges for children (age 5+) to build intuitions about
+rotations, complex numbers, matrices and geometric algebra, without ever writing a formula.
 
-| Version | Folder | Idea |
-|---|---|---|
-| v1 · The lessons | [`v1/`](v1/) | 12 guided levels with spoken instructions: from i to geometric algebra |
-| v2 · Rolling cubes | [`v2/`](v2/) | puzzle game: the top face of a cube remembers its path (the order of rotations matters) |
-| v3 · Whirls | [`v3/`](v3/) | fast Candy Crush-style game: rotate squares of animals, Rush 60 s, daily challenge |
-| v4 · Quick challenges | [`v4/`](v4/) | the 9 situations of v1 as few-second challenges ("do" and "predict"), streaks, medals, Rush |
-| v5 · The relation hunt | [`v5/`](v5/) | the game shows a relation and you find it everywhere on the board; richer relations (rotation, inverse, composition, mirror, bivector, matrices) score more |
+▶ [Play](https://edu-fpar.github.io/strange-mind/v4/?lang=en) · [The changing grid](https://edu-fpar.github.io/strange-mind/v4/?lang=en#6)
 
-Every game has an English version: EN button on each home screen, or `?lang=en` in the address.
+![The changing grid: which garden comes out of the 2×2 grid?](screenshots/changing-grid-en.png)
+
+Nine mini-games (the turning dolphin, the reverse turn, upside-down rabbits, the turning machine, the magic
+root, the changing grid, the vanishing garden, two mirrors make a turn, the secret whirl), each in "do" and
+"predict" modes with 4 difficulty levels, streaks, medals, a 60-second Rush and a daily challenge. Instructions
+are read aloud; no reading is needed to play. The earlier prototypes (guided lessons, rolling cubes, whirls,
+relation hunt) live in [fxpar/kid-games](https://github.com/fxpar/kid-games).
 
 **License:** © 2026 François Parlant — [CC BY-NC-SA 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 You may share and adapt this work, crediting the author ("Strange Mind, François Parlant", with a link to this
