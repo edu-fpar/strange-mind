@@ -39,6 +39,22 @@ puis 2, puis des tours mélangés, puis l'octogone par huitièmes).
 - **Rush 60 s** (tous les mini-jeux débloqués, de plus en plus vite, +2 s toutes les 3 bonnes réponses d'affilée) et **défi du jour** (le même pour tout le monde).
 - Consignes lues à voix haute (🗣️ pour couper), aucun texte nécessaire pour jouer.
 
+## Nouveau : le vent invisible (vers les équations de Maxwell)
+
+### ▶ [Jouer : edu-fpar.github.io/strange-mind/maxwell](https://edu-fpar.github.io/strange-mind/maxwell/)
+
+9 mini-jeux, même moteur que les défis éclair, pour préparer à **∇F = J** (Maxwell dans l'algèbre de Hestenes) :
+un « vent » (le champ) qui **sort** des fontaines (∇·E = ρ), qui **tourne** autour des fils (Ampère), qui ne
+sort de **nulle part** pour un aimant (∇·B = 0), qui naît quand un aimant **bouge** (Faraday), et une loupe
+magique qui lit d'un coup « ce qui sort + ce qui tourne », comme « flèche × flèche = lapin + tourbillon ».
+Le parcours et les choix de conception sont dans [maxwell/README.md](maxwell/README.md).
+
+Suite : **[les tiroirs magiques](https://edu-fpar.github.io/strange-mind/tiroirs/)** (6 mini-jeux) montrent *pourquoi*
+une seule équation suffit : on additionne des choses différentes (lapins, flèches, tapis, cubes) sans les mélanger,
+i change une flèche en tapis (B est un bivecteur), deux paniers sont égaux tiroir par tiroir (une équation → quatre
+lois), le temps est une direction de plus, et le bord d'une clôture dit ce qu'il y a dedans (Cauchy).
+Voir [tiroirs/README.md](tiroirs/README.md).
+
 ## Code
 
 ```
@@ -84,7 +100,11 @@ rotations, complex numbers, matrices and geometric algebra, without ever writing
 Nine mini-games (the turning dolphin, the reverse turn, upside-down rabbits, the turning machine, the magic
 root, the changing grid, the vanishing garden, two mirrors make a turn, the secret whirl), each in "do" and
 "predict" modes with 4 difficulty levels, streaks, medals, a 60-second Rush and a daily challenge. Instructions
-are read aloud; no reading is needed to play. The earlier prototypes (guided lessons, rolling cubes, whirls,
+are read aloud; no reading is needed to play. **New: The invisible wind** ([play](https://edu-fpar.github.io/strange-mind/maxwell/?lang=en)), nine
+mini-games towards Maxwell's equations in Hestenes' geometric algebra (∇F = J): fountains, pinwheels, loops,
+wires and compasses, a moving magnet, and a magic magnifier reading "what comes out + what swirls". Its sequel, **The magic drawers** ([play](https://edu-fpar.github.io/strange-mind/tiroirs/?lang=en)), shows why one
+equation is enough: multivectors as drawers, the geometric product, i turning arrows into carpets, grade-by-grade
+equality, spacetime worldlines, and boundaries (Cauchy). The earlier prototypes (guided lessons, rolling cubes, whirls,
 relation hunt) live in [fxpar/kid-games](https://github.com/fxpar/kid-games).
 
 **License:** © 2026 François Parlant — [CC BY-NC-SA 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/).
