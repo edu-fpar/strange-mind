@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this tool in teaching or research, please cite it as below."
+type: software
+title: "Strange Mind"
+abstract: "Educational games for children aged 5+: shapes that turn, to build intuitions about rotations, complex numbers, matrices and geometric algebra, then the ideas behind Maxwell's equations, without a single formula."
+authors:
+  - family-names: Parlant
+    given-names: François
+    orcid: "https://orcid.org/0009-0002-8059-6408"
+version: "1.0.0"
+date-released: "2026-11-25"
+license: CC-BY-NC-SA-4.0
+repository-code: "https://github.com/edu-fpar/strange-mind"
+url: "https://edu-fpar.github.io/strange-mind/"
+keywords:
+  - mathematics
+  - complex numbers
+  - matrices
+  - geometric algebra
+  - Maxwell's equations
+  - children
+  - educational game
