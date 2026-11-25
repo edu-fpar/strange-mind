@@ -1,5 +1,7 @@
 # Strange Mind
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24544809.svg)](https://doi.org/10.5281/zenodo.24544809)
+
 > 🇬🇧 English: every game has an English version (EN button, or add `?lang=en` to the address). See [the English summary](#english) below.
 
 **Des jeux pour construire chez les enfants des intuitions sur les rotations, les nombres complexes, les matrices,
@@ -54,6 +56,10 @@ Les autres jeux de Strange Mind sont des prototypes, sur [fxpar/kid-games](https
 vent invisible), la v1 complète (12 niveaux), les cubes qui roulent (v2), les tourbillons (v3) et la chasse aux
 relations (v5). Leur historique reste dans ce dépôt, avant les commits qui les ont déplacés.
 
+## Citer
+
+> Parlant, F. (2026). *Strange Mind* [Logiciel pédagogique]. Zenodo. https://doi.org/10.5281/zenodo.24544809
+
 ## Licence
 
 © 2026 François Parlant — [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr)
@@ -82,6 +88,8 @@ algebra… and the ideas behind Maxwell's equations, without ever writing a form
 
 The other versions (quick challenges, magic drawers, the full 12-level v1, rolling cubes, whirls, relation hunt)
 are prototypes in [fxpar/kid-games](https://github.com/fxpar/kid-games).
+
+**Cite:** Parlant, F. (2026). *Strange Mind* [Educational software]. Zenodo. https://doi.org/10.5281/zenodo.24544809
 
 **License:** © 2026 François Parlant — [CC BY-NC-SA 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 You may share and adapt this work, crediting the author ("Strange Mind, François Parlant", with a link to this
