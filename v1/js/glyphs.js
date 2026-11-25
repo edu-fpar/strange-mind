@@ -145,33 +145,6 @@ const DRAW = {
     ctx.fillStyle = '#7b2cbf'; ctx.beginPath(); ctx.arc(0, 0, 0.08, 0, 7); ctx.fill();
   },
 
-  bird(ctx) {
-    ctx.lineJoin = 'round'; ctx.lineWidth = 0.05; ctx.strokeStyle = '#8a5a00';
-    ctx.fillStyle = '#f4a300';
-    path(ctx, [[-0.45, -0.05], [-0.9, -0.3], [-0.82, 0.05], [-0.9, 0.3]]); ctx.fill(); ctx.stroke();
-    ctx.fillStyle = '#ffd23f';
-    ctx.beginPath(); ctx.ellipse(-0.05, 0.05, 0.55, 0.45, 0, 0, 7); ctx.fill(); ctx.stroke();
-    ctx.beginPath(); ctx.arc(0.35, -0.25, 0.32, 0, 7); ctx.fill(); ctx.stroke();
-    ctx.fillStyle = '#f4a300';
-    ctx.beginPath(); ctx.ellipse(-0.12, 0.12, 0.3, 0.18, -0.4, 0, 7); ctx.fill(); ctx.stroke();
-    ctx.fillStyle = '#ff7b00';
-    path(ctx, [[0.6, -0.33], [0.95, -0.22], [0.6, -0.12]]); ctx.fill(); ctx.stroke();
-    ctx.fillStyle = '#111'; ctx.beginPath(); ctx.arc(0.43, -0.32, 0.06, 0, 7); ctx.fill();
-  },
-
-  turtle(ctx) {
-    ctx.lineJoin = 'round'; ctx.lineWidth = 0.05; ctx.strokeStyle = '#1e5128';
-    ctx.fillStyle = '#7cc56b';
-    for (const [x, y] of [[0.35, -0.42], [0.35, 0.42], [-0.35, -0.42], [-0.35, 0.42]]) { ctx.beginPath(); ctx.ellipse(x, y, 0.14, 0.12, 0, 0, 7); ctx.fill(); ctx.stroke(); }
-    path(ctx, [[-0.55, -0.05], [-0.85, 0], [-0.55, 0.05]]); ctx.fill(); ctx.stroke();
-    ctx.beginPath(); ctx.ellipse(0.72, 0, 0.22, 0.18, 0, 0, 7); ctx.fill(); ctx.stroke();
-    ctx.fillStyle = '#2f8f46';
-    ctx.beginPath(); ctx.ellipse(0, 0, 0.6, 0.45, 0, 0, 7); ctx.fill(); ctx.stroke();
-    ctx.strokeStyle = '#a6e3a1'; ctx.lineWidth = 0.05;
-    path(ctx, [[-0.2, -0.2], [0.2, -0.2], [0.3, 0], [0.2, 0.2], [-0.2, 0.2], [-0.3, 0]]); ctx.stroke();
-    ctx.fillStyle = '#111'; ctx.beginPath(); ctx.arc(0.8, -0.06, 0.05, 0, 7); ctx.fill();
-  },
-
   ladybug(ctx) {
     ctx.fillStyle = '#222'; ctx.beginPath(); ctx.arc(0.55, 0, 0.25, 0, 7); ctx.fill();
     ctx.fillStyle = '#e63946'; ctx.strokeStyle = '#222'; ctx.lineWidth = 0.05;

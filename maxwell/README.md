@@ -9,7 +9,7 @@ Le pari : dans l'algèbre de Hestenes, les quatre équations de Maxwell n'en fon
 > avec F = E + I B (champ électromagnétique), ρ les charges et j les courants (unités où c = 1)
 
 et cette équation dit une seule chose : **la « loupe » ∇ appliquée au champ révèle ce qui le fabrique.**
-Comme le produit de deux flèches (`ab = a·b + a∧b`, jeu 9 des défis éclair : « flèche × flèche = lapin + tourbillon »),
+Comme le produit de deux flèches (`ab = a·b + a∧b`, leçon 6 des [leçons](../v1/) : « flèche × flèche = lapin + tourbillon »),
 le produit de ∇ par un champ se coupe en deux morceaux :
 
 - **ce qui SORT** d'un endroit (∇·, un nombre : fontaine +, trou −) ;
@@ -56,7 +56,7 @@ Choix de conception, dans l'esprit des autres versions :
   change d'un côté à l'autre, ni le lac sans sentir que seul compte ce qui est à l'intérieur ;
 - **les pièges sont les vrais contresens** du sujet : « le vent fait le tour, donc le moulinet tourne » (faux hors
   du fil), « un vent uniforme fait avancer le bateau » (pas sur un tour complet), « l'aimant allume la lampe » (seulement s'il bouge) ;
-- **mêmes images que les défis éclair** : lapin debout / tête en bas / nuage pour +1, −1, 0 ; ↺ rose et ↻ bleu pour les deux sens de rotation ;
+- **mêmes images que les leçons et les défis éclair** : lapin debout / tête en bas / nuage pour +1, −1, 0 ; ↺ rose et ↻ bleu pour les deux sens de rotation ;
 - **prévoir puis voir** : après la réponse, l'animation montre (le moulinet tourne, le lac se colore là où le vent
   pousse ↺ en rose et ↻ en bleu, les choses cachées apparaissent).
 
@@ -64,7 +64,7 @@ Volontairement laissés pour une suite : la 3D (B comme bivecteur de l'espace, l
 4ᵉ direction (algèbre de l'espace-temps, ∇ = γ^μ ∂_μ) et les ondes (un vent qui se fabrique lui-même : E qui change
 fait tourner B, B qui change fait tourner E).
 
-Suite : [les tiroirs magiques](../tiroirs/) montrent pourquoi une seule équation contient les quatre lois.
+Suite (prototype, sur kid-games) : [les tiroirs magiques](https://fxpar.github.io/kid-games/strange-mind/tiroirs/) montrent pourquoi une seule équation contient les quatre lois.
 
 ## Code
 
@@ -72,8 +72,8 @@ Suite : [les tiroirs magiques](../tiroirs/) montrent pourquoi une seule équatio
 js/games.js   les 9 mini-jeux : chacun fabrique des défis à l'infini (gen(niveau, hasard, mode))
 js/draw.js    les vents (fontaines, tourbillons, uniformes, rivières), divergence, rotationnel, circulation,
               graines emportées par le vent, moulinets, boussoles, fils, lacs, aimant et anneau, loupe
-js/main.js    accueil, séances, séries, niveaux, Rush, défi du jour, sons, voix, sauvegarde (repris de la v4)
-js/glyphs.js  dessins des animaux (repris de la v4)
+js/main.js    accueil, séances, séries, niveaux, Rush, défi du jour, sons, voix, sauvegarde (repris des [défis éclair](https://fxpar.github.io/kid-games/strange-mind/v4/))
+js/glyphs.js  dessins des animaux (repris des défis éclair)
 ```
 
 Accès direct : `#3` (mini-jeu 3), `#rush`, `#daily`. Outil de test dans la console :

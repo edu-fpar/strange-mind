@@ -74,15 +74,17 @@ function stepConf() {
 
 // ---------------- accueil ----------------
 function show(id) { for (const s of document.querySelectorAll('.screen')) s.hidden = s.id !== id; }
-const unlocked = (i) => i === 0 || gsave(GAMES[i - 1].id).stars > 0;
+// navigation libre : tous les mini-jeux sont ouverts dès le départ (plus de cadenas)
+const unlocked = () => true;
 
 function renderHome() {
   const box = $('#games');
   box.innerHTML = '';
+  const firstNew = GAMES.findIndex((g) => !gsave(g.id).stars); // seul le premier jeu pas encore réussi sautille
   GAMES.forEach((g, i) => {
     const s = gsave(g.id), lock = !unlocked(i);
     const b = document.createElement('button');
-    b.className = 'game-card' + (lock ? ' locked' : '') + (!lock && !s.stars ? ' next' : '');
+    b.className = 'game-card' + (lock ? ' locked' : '') + (i === firstNew ? ' next' : '');
     b.innerHTML = `<span class="num">${i + 1}</span><span class="icon">${lock ? '🔒' : g.icon}</span><span class="name">${t(g.name)}</span>
       <span class="meta">${'★'.repeat(s.stars)}${'☆'.repeat(3 - s.stars)} <span class="medal">${MEDALS[s.medal]}</span></span>`;
     if (!lock) b.addEventListener('click', () => startSession({ kind: 'game', ids: [g.id] }));

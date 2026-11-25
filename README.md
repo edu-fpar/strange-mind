@@ -1,72 +1,44 @@
-# Strange Mind · Défis éclair
+# Strange Mind
 
 > 🇬🇧 English: every game has an English version (EN button, or add `?lang=en` to the address). See [the English summary](#english) below.
 
-**Des défis de quelques secondes pour construire chez les enfants (dès 5 ans) des intuitions sur les rotations,
-les nombres complexes, les matrices et l'algèbre géométrique, sans jamais écrire une formule.**
+**Des jeux pour construire chez les enfants des intuitions sur les rotations, les nombres complexes, les matrices,
+l'algèbre géométrique… et les idées des équations de Maxwell, sans jamais écrire une formule.**
 
-### ▶ [Jouer : edu-fpar.github.io/strange-mind/v4](https://edu-fpar.github.io/strange-mind/v4/) · [La grille qui transforme](https://edu-fpar.github.io/strange-mind/v4/#6)
+### ▶ [Jouer : edu-fpar.github.io/strange-mind](https://edu-fpar.github.io/strange-mind/)
 
-![La grille qui transforme : on règle une grille 2×2 de tuiles (lapins, nuages) pour refaire le jardin en pointillés](screenshots/changing-grid-fr.png)
+![La fontaine cachée : que cache le nuage, une fontaine, un trou ou rien ?](screenshots/hidden-fountain-fr.png)
 
-Chaque bonne réponse **est** la notion : on ne peut pas réussir sans s'en servir.
-
-## Les 9 mini-jeux (accès direct : `v4/#1` à `v4/#9`)
-
-| # | Mini-jeu | Faire | Prévoir | Notion |
-|---|---|---|---|---|
-| 1 | Le dauphin a faim | tourner le dauphin vers le poisson | où regardera-t-il après ↺↺ ? | quart de tour = ×i |
-| 2 | Le tour à l'envers | un seul bouton ↺ : le bon nombre de tours | « ↺↺↺ fait pareil que… ? » | i³ = −i, inverse |
-| 3 | Lapins debout, tête en bas | retourner les lapins pour amener la coccinelle au drapeau | où va la coccinelle ? | +1, 0, −1, opposés |
-| 4 | La machine à tourner | A × ? = cible | A × B = ? | multiplier = additionner les angles |
-| 5 | La racine magique | ? × ? = cible (puis trouver les DEUX) | A × A = ? | √i, deux solutions |
-| 6 | La grille qui transforme | régler la grille pour refaire le jardin | quel jardin sort de la grille ? | matrice = transformation |
-| 7 | Le jardin qui disparaît | — | normal 🙂, miroir 🪞 ou écrasé 💨 ? | signe du déterminant |
-| 8 | Deux miroirs font un tour | tourner 1 puis 2 miroirs | que voit-on dans le(s) miroir(s) ? | réflexions, 2 miroirs = rotation |
-| 9 | Le tourbillon secret | tourner la flèche verte pour obtenir le résultat | flèche × flèche = ? | produit géométrique, bivecteur, ab = −ba |
-
-Chaque mini-jeu a **4 niveaux** de difficulté (par exemple pour le dauphin : 1 quart de tour,
-puis 2, puis des tours mélangés, puis l'octogone par huitièmes).
-
-## Ce qui encourage
-
-- **Prévoir puis voir** : après la réponse, l'animation montre ce qui se passe vraiment.
-- **Erreur douce** : on montre la bonne réponse, seule la série est perdue.
-- **Séries** 🔥 avec sons qui montent, confettis à 3, 5, 10…
-- **Difficulté qui s'adapte** : 4 réussites d'affilée → niveau supérieur ; 2 erreurs → on redescend.
-- **Étoiles** par partie de 10 défis (6, 8, 10 bonnes réponses) ; une ★ débloque le mini-jeu suivant.
-- **Médailles** 🥉🥈🥇💎 : le plus haut niveau maîtrisé (4 réussites d'affilée à ce niveau).
-- **Rush 60 s** (tous les mini-jeux débloqués, de plus en plus vite, +2 s toutes les 3 bonnes réponses d'affilée) et **défi du jour** (le même pour tout le monde).
-- Consignes lues à voix haute (🗣️ pour couper), aucun texte nécessaire pour jouer.
-
-## Nouveau : le vent invisible (vers les équations de Maxwell)
+## Le vent invisible (vers les équations de Maxwell, dès 6 ans)
 
 ### ▶ [Jouer : edu-fpar.github.io/strange-mind/maxwell](https://edu-fpar.github.io/strange-mind/maxwell/)
 
-9 mini-jeux, même moteur que les défis éclair, pour préparer à **∇F = J** (Maxwell dans l'algèbre de Hestenes) :
-un « vent » (le champ) qui **sort** des fontaines (∇·E = ρ), qui **tourne** autour des fils (Ampère), qui ne
-sort de **nulle part** pour un aimant (∇·B = 0), qui naît quand un aimant **bouge** (Faraday), et une loupe
-magique qui lit d'un coup « ce qui sort + ce qui tourne », comme « flèche × flèche = lapin + tourbillon ».
-Le parcours et les choix de conception sont dans [maxwell/README.md](maxwell/README.md).
+9 mini-jeux pour préparer à **∇F = J** (Maxwell dans l'algèbre de Hestenes) : un « vent » (le champ) qui **sort**
+des fontaines (∇·E = ρ), qui **tourne** autour des fils (Ampère), qui ne sort de **nulle part** pour un aimant
+(∇·B = 0), qui naît quand un aimant **bouge** (Faraday), et une loupe magique qui lit d'un coup « ce qui sort + ce qui
+tourne », comme « flèche × flèche = lapin + tourbillon ».
 
-Suite : **[les tiroirs magiques](https://edu-fpar.github.io/strange-mind/tiroirs/)** (6 mini-jeux) montrent *pourquoi*
-une seule équation suffit : on additionne des choses différentes (lapins, flèches, tapis, cubes) sans les mélanger,
-i change une flèche en tapis (B est un bivecteur), deux paniers sont égaux tiroir par tiroir (une équation → quatre
-lois), le temps est une direction de plus, et le bord d'une clôture dit ce qu'il y a dedans (Cauchy).
-Voir [tiroirs/README.md](tiroirs/README.md).
+Chaque mini-jeu a un mode « faire » et un mode « prévoir », 4 niveaux de difficulté, des séries, des médailles, un
+Rush 60 s et un défi du jour. **Navigation libre** : les 9 mini-jeux sont ouverts dès le départ (accès direct
+`maxwell/#1` à `#9`). Le parcours et les choix de conception sont dans [maxwell/README.md](maxwell/README.md).
 
-## Code
+## Les leçons (dès 5 ans)
 
-```
-v4/js/games.js   les 9 mini-jeux : chacun fabrique des défis à l'infini (gen(niveau, hasard, mode))
-v4/js/draw.js    dessins partagés (mer, droite des nombres, tuiles-nombres, jardin, grille)
-v4/js/main.js    accueil, séances, séries, niveaux, Rush, défi du jour, sons, voix, sauvegarde
-v4/js/glyphs.js  dessins des animaux
-```
+### ▶ [Jouer : edu-fpar.github.io/strange-mind/v1](https://edu-fpar.github.io/strange-mind/v1/)
 
-Accès direct : `#3` (mini-jeu 3), `#rush`, `#daily`.
-Pour ajouter un mini-jeu : un objet `{ id, name, icon, gen(lvl, R, mode) }` dans `GAMES`
-(le format d'un défi est décrit en tête de `js/games.js`).
+6 leçons guidées, avec des formes en 3D qu'on fait basculer et tourner, et des consignes lues à voix haute :
+
+| # | Leçon | Notion |
+|---|---|---|
+| 1 | La machine à tourner | multiplier = additionner les angles |
+| 2 | La racine magique | √i, et x² = −1 a deux solutions |
+| 3 | La grille qui transforme | matrice = transformation |
+| 4 | Le jardin qui disparaît | déterminant 0, 2, −2 |
+| 5 | Deux miroirs font un tour | réflexions → rotation (Hestenes) |
+| 6 | Le tourbillon secret | bivecteur, ab = −ba |
+
+**Navigation libre** : toutes les leçons sont ouvertes dès le départ (accès direct `v1/#1` à `v1/#6`). Le bouton 🎓
+de chaque leçon donne l'explication pour les adultes. Voir [v1/README.md](v1/README.md).
 
 ## Lancer en local
 
@@ -75,10 +47,10 @@ http://localhost:8765/ (un double-clic sur `index.html` ne suffit pas : les modu
 
 ## Les autres versions
 
-Les prototypes qui ont mené aux défis éclair (v1 · leçons guidées, v2 · cubes qui roulent, v3 · tourbillons,
-v5 · chasse aux relations) sont sur [fxpar/kid-games](https://github.com/fxpar/kid-games)
-([jouer](https://fxpar.github.io/kid-games/strange-mind/)). Leur historique reste dans ce dépôt, avant le
-commit qui les a déplacés.
+Les autres jeux de Strange Mind sont des prototypes, sur [fxpar/kid-games](https://github.com/fxpar/kid-games)
+([jouer](https://fxpar.github.io/kid-games/strange-mind/)) : les défis éclair (v4), les tiroirs magiques (suite du
+vent invisible), la v1 complète (12 leçons), les cubes qui roulent (v2), les tourbillons (v3) et la chasse aux
+relations (v5). Leur historique reste dans ce dépôt, avant les commits qui les ont déplacés.
 
 ## Licence
 
@@ -90,22 +62,24 @@ licence. Voir [LICENSE](LICENSE).
 
 ## English
 
-**Strange Mind · Quick challenges**: few-second challenges for children (age 5+) to build intuitions about
-rotations, complex numbers, matrices and geometric algebra, without ever writing a formula.
+**Strange Mind**: games for children to build intuitions about rotations, complex numbers, matrices, geometric
+algebra… and the ideas behind Maxwell's equations, without ever writing a formula.
 
-▶ [Play](https://edu-fpar.github.io/strange-mind/v4/?lang=en) · [The changing grid](https://edu-fpar.github.io/strange-mind/v4/?lang=en#6)
+▶ [Play](https://edu-fpar.github.io/strange-mind/?lang=en)
 
-![The changing grid: which garden comes out of the 2×2 grid?](screenshots/changing-grid-en.png)
+![The hidden fountain: what is the cloud hiding?](screenshots/hidden-fountain-en.png)
 
-Nine mini-games (the turning dolphin, the reverse turn, upside-down rabbits, the turning machine, the magic
-root, the changing grid, the vanishing garden, two mirrors make a turn, the secret whirl), each in "do" and
-"predict" modes with 4 difficulty levels, streaks, medals, a 60-second Rush and a daily challenge. Instructions
-are read aloud; no reading is needed to play. **New: The invisible wind** ([play](https://edu-fpar.github.io/strange-mind/maxwell/?lang=en)), nine
-mini-games towards Maxwell's equations in Hestenes' geometric algebra (∇F = J): fountains, pinwheels, loops,
-wires and compasses, a moving magnet, and a magic magnifier reading "what comes out + what swirls". Its sequel, **The magic drawers** ([play](https://edu-fpar.github.io/strange-mind/tiroirs/?lang=en)), shows why one
-equation is enough: multivectors as drawers, the geometric product, i turning arrows into carpets, grade-by-grade
-equality, spacetime worldlines, and boundaries (Cauchy). The earlier prototypes (guided lessons, rolling cubes, whirls,
-relation hunt) live in [fxpar/kid-games](https://github.com/fxpar/kid-games).
+- **The invisible wind** ([play](https://edu-fpar.github.io/strange-mind/maxwell/?lang=en)), age 6+: nine
+  mini-games towards Maxwell's equations in Hestenes' geometric algebra (∇F = J): fountains, pinwheels, loops,
+  wires and compasses, a moving magnet, and a magic magnifier reading "what comes out + what swirls". "Do" and
+  "predict" modes, 4 difficulty levels, streaks, medals, a 60-second Rush and a daily challenge. All games are
+  open from the start.
+- **The lessons** ([play](https://edu-fpar.github.io/strange-mind/v1/?lang=en)), age 5+: six guided lessons with
+  3D shapes and spoken instructions (the turning machine, the magic root, the changing grid, the vanishing garden,
+  two mirrors make a turn, the secret whirl), all open from the start.
+
+The other versions (quick challenges, magic drawers, the full 12-lesson v1, rolling cubes, whirls, relation hunt)
+are prototypes in [fxpar/kid-games](https://github.com/fxpar/kid-games).
 
 **License:** © 2026 François Parlant — [CC BY-NC-SA 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 You may share and adapt this work, crediting the author ("Strange Mind, François Parlant", with a link to this
