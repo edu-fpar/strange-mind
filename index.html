@@ -16,8 +16,6 @@
     .card .big { font-size: 46px; }
     .card h2 { margin: 6px 0 4px; }
     .card p { margin: 0; line-height: 1.4; color: #5b4f86; }
-    .card.main { grid-column: 1 / -1; }
-    .card img { width: 100%; border-radius: 14px; display: block; margin-bottom: 6px; }
     p.other { text-align: center; margin: 22px 0 0; color: #5b4f86; }
     p.other a { color: #7b2cbf; }
     #lang { position: absolute; top: 24px; right: 0; width: 46px; height: 46px; border: none; border-radius: 14px; background: #fff; font-size: 16px; font-weight: 800; color: #7b2cbf; box-shadow: 0 3px 0 #cdbdf0; cursor: pointer; }
@@ -29,13 +27,12 @@
   <main>
     <button id="lang" title="English version">EN</button>
     <h1>Strange Mind</h1>
-    <p class="sub" data-t="hub-sub">Des jeux pour sentir les rotations, les nombres complexes, les matrices… et les idées des équations de Maxwell, sans une seule formule.</p>
+    <p class="sub" data-t="hub-sub">Des formes qui tournent pour sentir les rotations, les nombres complexes, les matrices… puis les idées des équations de Maxwell, sans une seule formule.</p>
     <div class="cards">
-      <a class="card main" href="maxwell/"><img src="screenshots/hidden-fountain-fr.png" data-src-en="screenshots/hidden-fountain-en.png" alt="">
-        <div class="big">🌬️</div><h2 data-t="hub-mx-t">Le vent invisible</h2>
-        <p data-t="hub-mx">9 mini-jeux vers les équations de Maxwell, dès 6 ans : fontaines cachées, moulinets, tour du lac, fils et boussoles, aimant qui allume une lampe, et la loupe magique qui lit « ce qui sort + ce qui tourne ». Tous les jeux sont ouverts dès le départ.</p></a>
-      <a class="card main" href="v1/"><div class="big">🦉</div><h2 data-t="hub-v1-t">Les leçons</h2>
-        <p data-t="hub-v1">6 leçons guidées, dès 5 ans, avec des formes qu'on fait tourner et des consignes lues à voix haute : la machine à tourner, la racine magique, la grille qui transforme, le jardin qui disparaît, deux miroirs, le tourbillon secret.</p></a>
+      <a class="card" href="v1/"><div class="big">🦉</div><h2 data-t="hub-v1-t">1 · Les leçons</h2>
+        <p data-t="hub-v1">Pour commencer, dès 5 ans : 6 leçons guidées, des formes qu'on fait tourner et des consignes lues à voix haute. La machine à tourner, la racine magique, la grille qui transforme, le jardin qui disparaît, deux miroirs, le tourbillon secret.</p></a>
+      <a class="card" href="maxwell/"><div class="big">🌬️</div><h2 data-t="hub-mx-t">2 · Le vent invisible</h2>
+        <p data-t="hub-mx">Ensuite, dès 6 ans : 9 mini-jeux vers les équations de Maxwell. Fontaines cachées, moulinets, tour du lac, fils et boussoles, aimant qui allume une lampe, et la loupe magique qui lit « ce qui sort + ce qui tourne ».</p></a>
     </div>
     <p class="other" data-t="hub-other">Les autres versions (défis éclair, tiroirs magiques, leçons complètes, cubes qui roulent, tourbillons, chasse aux relations) sont sur <a href="https://fxpar.github.io/kid-games/strange-mind/">fxpar.github.io/kid-games</a>.</p>
     <footer data-t="hub-footer">« Strange Mind » par François Parlant ·
@@ -44,18 +41,17 @@
       partage et adaptation autorisés, en citant l'auteur, sans usage commercial, sous la même licence.</footer>
   </main>
   <script type="module">
-    import { LANG, setDictionary, translateDom, langToggle } from './v1/js/i18n.js';
+    import { setDictionary, translateDom, langToggle } from './v1/js/i18n.js';
     setDictionary({
-      'hub-sub': 'Games to get a feel for rotations, complex numbers, matrices… and the ideas behind Maxwell’s equations, without a single formula.',
-      'hub-mx-t': 'The invisible wind',
-      'hub-mx': '9 mini-games towards Maxwell’s equations, from age 6: hidden fountains, pinwheels, around the lake, wires and compasses, a magnet that lights a lamp, and the magic magnifier that reads “what comes out + what swirls”. All games are open from the start.',
-      'hub-v1-t': 'The lessons',
-      'hub-v1': '6 guided lessons, from age 5, with shapes to turn and instructions read aloud: the turning machine, the magic root, the changing grid, the vanishing garden, two mirrors, the secret whirl.',
+      'hub-sub': 'Shapes that turn, to get a feel for rotations, complex numbers, matrices… then the ideas behind Maxwell’s equations, without a single formula.',
+      'hub-mx-t': '2 · The invisible wind',
+      'hub-mx': 'Next, from age 6: 9 mini-games towards Maxwell’s equations. Hidden fountains, pinwheels, around the lake, wires and compasses, a magnet that lights a lamp, and the magic magnifier that reads “what comes out + what swirls”.',
+      'hub-v1-t': '1 · The lessons',
+      'hub-v1': 'Start here, from age 5: 6 guided lessons, shapes to turn and instructions read aloud. The turning machine, the magic root, the changing grid, the vanishing garden, two mirrors, the secret whirl.',
       'hub-other': 'The other versions (quick challenges, magic drawers, full lessons, rolling cubes, whirls, relation hunt) are on <a href="https://fxpar.github.io/kid-games/strange-mind/">fxpar.github.io/kid-games</a>.',
       'hub-footer': '"Strange Mind" by François Parlant · <a href="https://github.com/edu-fpar/strange-mind">github.com/edu-fpar/strange-mind</a><br>License <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>: you may share and adapt it, crediting the author, for non-commercial use, under the same license.',
     });
     translateDom();
-    if (LANG === 'en') document.querySelectorAll('[data-src-en]').forEach((i) => { i.src = i.dataset.srcEn; });
     langToggle(document.getElementById('lang'));
   </script>
 </body>

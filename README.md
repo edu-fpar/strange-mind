@@ -3,26 +3,13 @@
 > 🇬🇧 English: every game has an English version (EN button, or add `?lang=en` to the address). See [the English summary](#english) below.
 
 **Des jeux pour construire chez les enfants des intuitions sur les rotations, les nombres complexes, les matrices,
-l'algèbre géométrique… et les idées des équations de Maxwell, sans jamais écrire une formule.**
+l'algèbre géométrique… puis les idées des équations de Maxwell, sans jamais écrire une formule.**
 
 ### ▶ [Jouer : edu-fpar.github.io/strange-mind](https://edu-fpar.github.io/strange-mind/)
 
-![La fontaine cachée : que cache le nuage, une fontaine, un trou ou rien ?](screenshots/hidden-fountain-fr.png)
+![La machine à tourner : fais tourner B pour que le dauphin regarde à droite](screenshots/turning-machine-fr.png)
 
-## Le vent invisible (vers les équations de Maxwell, dès 6 ans)
-
-### ▶ [Jouer : edu-fpar.github.io/strange-mind/maxwell](https://edu-fpar.github.io/strange-mind/maxwell/)
-
-9 mini-jeux pour préparer à **∇F = J** (Maxwell dans l'algèbre de Hestenes) : un « vent » (le champ) qui **sort**
-des fontaines (∇·E = ρ), qui **tourne** autour des fils (Ampère), qui ne sort de **nulle part** pour un aimant
-(∇·B = 0), qui naît quand un aimant **bouge** (Faraday), et une loupe magique qui lit d'un coup « ce qui sort + ce qui
-tourne », comme « flèche × flèche = lapin + tourbillon ».
-
-Chaque mini-jeu a un mode « faire » et un mode « prévoir », 4 niveaux de difficulté, des séries, des médailles, un
-Rush 60 s et un défi du jour. **Navigation libre** : les 9 mini-jeux sont ouverts dès le départ (accès direct
-`maxwell/#1` à `#9`). Le parcours et les choix de conception sont dans [maxwell/README.md](maxwell/README.md).
-
-## Les leçons (dès 5 ans)
+## 1 · Les leçons (pour commencer, dès 5 ans)
 
 ### ▶ [Jouer : edu-fpar.github.io/strange-mind/v1](https://edu-fpar.github.io/strange-mind/v1/)
 
@@ -39,6 +26,21 @@ Rush 60 s et un défi du jour. **Navigation libre** : les 9 mini-jeux sont ouver
 
 **Navigation libre** : toutes les leçons sont ouvertes dès le départ (accès direct `v1/#1` à `v1/#6`). Le bouton 🎓
 de chaque leçon donne l'explication pour les adultes. Voir [v1/README.md](v1/README.md).
+
+## 2 · Le vent invisible (ensuite, vers les équations de Maxwell, dès 6 ans)
+
+### ▶ [Jouer : edu-fpar.github.io/strange-mind/maxwell](https://edu-fpar.github.io/strange-mind/maxwell/)
+
+![La fontaine cachée : que cache le nuage, une fontaine, un trou ou rien ?](screenshots/hidden-fountain-fr.png)
+
+9 mini-jeux pour préparer à **∇F = J** (Maxwell dans l'algèbre de Hestenes) : un « vent » (le champ) qui **sort**
+des fontaines (∇·E = ρ), qui **tourne** autour des fils (Ampère), qui ne sort de **nulle part** pour un aimant
+(∇·B = 0), qui naît quand un aimant **bouge** (Faraday), et une loupe magique qui lit d'un coup « ce qui sort + ce qui
+tourne », comme « flèche × flèche = lapin + tourbillon ».
+
+Chaque mini-jeu a un mode « faire » et un mode « prévoir », 4 niveaux de difficulté, des séries, des médailles, un
+Rush 60 s et un défi du jour. **Navigation libre** : les 9 mini-jeux sont ouverts dès le départ (accès direct
+`maxwell/#1` à `#9`). Le parcours et les choix de conception sont dans [maxwell/README.md](maxwell/README.md).
 
 ## Lancer en local
 
@@ -67,16 +69,16 @@ algebra… and the ideas behind Maxwell's equations, without ever writing a form
 
 ▶ [Play](https://edu-fpar.github.io/strange-mind/?lang=en)
 
-![The hidden fountain: what is the cloud hiding?](screenshots/hidden-fountain-en.png)
+![The turning machine: turn B so the dolphin faces right](screenshots/turning-machine-en.png)
 
-- **The invisible wind** ([play](https://edu-fpar.github.io/strange-mind/maxwell/?lang=en)), age 6+: nine
+- **1 · The lessons** (start here) ([play](https://edu-fpar.github.io/strange-mind/v1/?lang=en)), age 5+: six guided lessons with
+  3D shapes and spoken instructions (the turning machine, the magic root, the changing grid, the vanishing garden,
+  two mirrors make a turn, the secret whirl), all open from the start.
+- **2 · The invisible wind** ([play](https://edu-fpar.github.io/strange-mind/maxwell/?lang=en)), age 6+: nine
   mini-games towards Maxwell's equations in Hestenes' geometric algebra (∇F = J): fountains, pinwheels, loops,
   wires and compasses, a moving magnet, and a magic magnifier reading "what comes out + what swirls". "Do" and
   "predict" modes, 4 difficulty levels, streaks, medals, a 60-second Rush and a daily challenge. All games are
   open from the start.
-- **The lessons** ([play](https://edu-fpar.github.io/strange-mind/v1/?lang=en)), age 5+: six guided lessons with
-  3D shapes and spoken instructions (the turning machine, the magic root, the changing grid, the vanishing garden,
-  two mirrors make a turn, the secret whirl), all open from the start.
 
 The other versions (quick challenges, magic drawers, the full 12-lesson v1, rolling cubes, whirls, relation hunt)
 are prototypes in [fxpar/kid-games](https://github.com/fxpar/kid-games).
