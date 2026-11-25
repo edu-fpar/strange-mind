@@ -148,7 +148,12 @@ export const LEVELS = [
       },
     }],
     steps: [
+      { say: 'Regarde la main 👆 : ces carrés sont des cubes ! En glissant, le cube bascule et montre une autre face. Avec ↻, il tourne. À toi : fais apparaître un lapin tête en bas !',
+        demo: { id: 'a', moves: ['swipe-right', 'twist-cw'] },
+        goal: (S) => ['a', 'b', 'c', 'd'].some((id) => S.real(id) === -1),
+        hint: 'Glisse sur un cube pour voir un lapin, puis appuie sur ↻.', bravo: 'Bravo ! Lapin debout = 1, nuage = 0, lapin tête en bas = −1.' },
       { say: 'Le jardin a disparu ! Chaque cube est un nombre. Fais revenir le jardin comme le modèle en pointillés.', T: [[1, 0], [0, 1]],
+        setup: (S) => { for (const id of ['a', 'b', 'c', 'd']) S.set(id, 1, 0); },
         goal: (S) => same(matrix(S), [[1, 0], [0, 1]]), hint: 'Un lapin debout en haut à gauche, un en bas à droite.', bravo: 'Le jardin est revenu !' },
       { say: 'Maintenant, montre le jardin dans un miroir 🪞 : la maison doit passer de l’autre côté.', T: [[-1, 0], [0, 1]],
         goal: (S) => same(matrix(S), [[-1, 0], [0, 1]]), hint: 'Retourne le lapin en haut à gauche.' },

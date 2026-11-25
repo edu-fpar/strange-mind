@@ -14,6 +14,7 @@ import { t } from './i18n.js';
 
 const LIGHT = norm([-0.45, 0.6, 1]);
 const ANIM_MS = 320;
+const DEMO_MS = 750; // basculements plus lents pendant la démonstration
 const ease = (t) => 1 - Math.pow(1 - t, 3);
 
 export class Shape {
@@ -91,8 +92,8 @@ export class Shape {
     this.goTo(Quat.axisAngle(Z, (dirDeg - phi) * DEG).mul(q1).normalize(), animate);
   }
 
-  goTo(q, animate = true) {
-    if (animate) this.anim = { from: this.show.clone(), to: q, t0: performance.now(), dur: ANIM_MS };
+  goTo(q, animate = true, dur = ANIM_MS) {
+    if (animate) this.anim = { from: this.show.clone(), to: q, t0: performance.now(), dur };
     else { this.show = q.clone(); this.anim = null; }
     this.q = q;
     this.world?.dirty();
@@ -105,7 +106,7 @@ export class Shape {
   }
 
   /** Basculer vers la face située du côté opposé au glissement (dx, dy en pixels écran). */
-  tumble(dx, dy) {
+  tumble(dx, dy, demo = false) {
     if (this.tumbleMode === 'none') return this.shake();
     let d = [dx, -dy, 0];
     if (this.tumbleMode === 'h') d = [Math.sign(dx) || 1, 0, 0];
@@ -119,6 +120,7 @@ export class Shape {
       if (s > bd) { bd = s; best = i; }
     });
     if (best < 0) return this.shake();
+    if (demo) { this.goTo(this.snapped(this.q, best), true, DEMO_MS); return this.world?.sound('tumble'); }
     this.goTo(this.snapped(this.q, best));
     this.moves++; this.tumbles++;
     this.history.push(this.dir());
@@ -130,9 +132,10 @@ export class Shape {
   }
 
   /** Tourner la face visible : sign = +1 anti-horaire (↺), -1 horaire (↻). */
-  twist(sign) {
+  twist(sign, demo = false) {
     if (!this.twistOn || !this.twistDirs.includes(sign)) return this.shake();
     const q = Quat.axisAngle(Z, sign * this.twistStep() * DEG).mul(this.q);
+    if (demo) { this.goTo(this.snapped(q, this.frontIndex(q)), true, DEMO_MS); return this.world?.sound('twist'); }
     this.goTo(this.snapped(q, this.frontIndex(q)));
     this.moves++; this.twists++; this.turnSum += sign;
     this.history.push(this.dir());
@@ -195,6 +198,7 @@ export class World {
   }
 
   destroy() {
+    this.destroyed = true;
     cancelAnimationFrame(this.raf);
     this.ro.disconnect();
     window.removeEventListener('keydown', this._onKey);
@@ -259,6 +263,72 @@ export class World {
   }
 
   toScreen([x, y]) { return [this.ox + x * this.k, this.oy - y * this.k]; }
+
+  // ---------- démonstration : une main montre les gestes ----------
+  /**
+   * Une main 👆 montre les gestes sur une forme : 'swipe' (glisser = basculer en 3D) ou 'twist'
+   * (appuyer sur ↻ = tourner). Les coups ne comptent pas ; à la fin, la forme revient doucement à sa place.
+   * Pendant la démonstration, le joueur ne peut pas toucher les formes.
+   */
+  async demo(shape, moves) {
+    if (!shape) return;
+    this.enabled = false;
+    const q0 = shape.q.clone();
+    const hand = document.createElement('div');
+    hand.className = 'demo-hand';
+    hand.textContent = '👆';
+    this.overlay.append(hand);
+    this.layout(); // la scène vient peut-être d'être créée : on calcule les positions maintenant
+    let hx = 0, hy = 0;
+    const put = (x, y) => { hx = x; hy = y; hand.style.left = x + 'px'; hand.style.top = y + 'px'; };
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+    const move = (x, y, ms) => new Promise((res) => {
+      const x0 = hx, y0 = hy, t0 = performance.now();
+      const f = (now) => {
+        if (this.destroyed) return res();
+        const k = Math.min(1, (now - t0) / ms), e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+        put(x0 + (x - x0) * e, y0 + (y - y0) * e);
+        if (k < 1) setTimeout(() => f(performance.now()), 16); else res();
+      };
+      f(t0);
+    });
+    const center = () => this.toScreen(shape.pos);
+    const r = () => this.k * shape.size * 0.7;
+    { const [x, y] = center(); put(x, y + 1.6 * r()); }
+    await sleep(400);
+    for (const m of moves) {
+      if (this.destroyed) return;
+      if (m === 'swipe-right' || m === 'swipe-left') {
+        const s = m === 'swipe-right' ? 1 : -1;
+        let [x, y] = center();
+        await move(x - s * r(), y, 500);
+        hand.classList.add('press');
+        await sleep(150);
+        shape.tumble(s, 0, true);
+        [x, y] = center();
+        await move(x + s * r(), y, 750);
+        hand.classList.remove('press');
+        await sleep(500);
+      } else {
+        const btn = m === 'twist-cw' ? shape.ui.cw : shape.ui.ccw;
+        const b = btn.getBoundingClientRect(), o = this.overlay.getBoundingClientRect();
+        await move(b.left - o.left + b.width / 2, b.top - o.top + b.height * 0.55, 600);
+        hand.classList.add('press'); btn.classList.add('demo-press');
+        shape.twist(m === 'twist-cw' ? -1 : 1, true);
+        await sleep(350);
+        hand.classList.remove('press'); btn.classList.remove('demo-press');
+        await sleep(900);
+      }
+    }
+    if (this.destroyed) return;
+    hand.classList.add('gone');
+    await sleep(500);
+    shape.goTo(q0, true, 900);
+    await sleep(950);
+    hand.remove();
+    this.enabled = true;
+    this.dirty();
+  }
 
   // ---------- boutons de rotation sous chaque forme ----------
   makeControls(shape) {

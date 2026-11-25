@@ -101,7 +101,14 @@ button { font: inherit; color: inherit; cursor: pointer; }
   box-shadow: 0 3px 0 #d9cdf0, 0 4px 10px rgba(80, 50, 140, .12);
   display: grid; place-items: center; touch-action: manipulation;
 }
-.twistbtn:active { transform: translateY(2px); box-shadow: 0 1px 0 #d9cdf0; }
+.twistbtn:active, .twistbtn.demo-press { transform: translateY(2px); box-shadow: 0 1px 0 #d9cdf0; background: #f1e9ff; }
+.demo-hand {
+  position: absolute; z-index: 5; font-size: 52px; line-height: 1; pointer-events: none;
+  transform: translate(-35%, -8%); filter: drop-shadow(0 4px 4px rgba(60, 30, 120, .3));
+  opacity: 1; transition: transform .12s, opacity .4s;
+}
+.demo-hand.press { transform: translate(-35%, -8%) scale(.85); }
+.demo-hand.gone { opacity: 0; }
 
 #panels {
   flex: none; height: clamp(140px, 33vh, 320px);

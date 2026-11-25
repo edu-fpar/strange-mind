@@ -89,6 +89,8 @@ export const EN_LEVELS = {
       <p>We look for: the <b>identity</b> [[1,0],[0,1]], the <b>mirror</b> [[−1,0],[0,1]], the <b>quarter turn</b> [[0,−1],[1,0]] and the <b>half turn</b> [[−1,0],[0,−1]].</p>
       <p>A note for grown-ups: the quarter turn squared gives the half turn = −1: the matrix [[0,−1],[1,0]] <b>is</b> the number i.</p>`,
     steps: [
+      { say: 'Watch the hand 👆: these squares are cubes! When you swipe, the cube flips over and shows another face. With ↻, it turns. Your turn: make an upside-down bunny appear!',
+        hint: 'Swipe a cube to see a bunny, then press ↻.', bravo: 'Well done! Standing bunny = 1, cloud = 0, upside-down bunny = −1.' },
       { say: 'The garden has vanished! Each cube is a number. Bring the garden back like the dotted picture.', hint: 'One bunny standing up at the top left, one at the bottom right.', bravo: 'The garden is back!' },
       { say: 'Now show the garden in a mirror 🪞: the house must move to the other side.', hint: 'Turn over the bunny at the top left.' },
       { say: 'Make the garden do a quarter turn ↺', hint: 'The bunnies go into the other boxes. Look where the red and blue arrows go.' },

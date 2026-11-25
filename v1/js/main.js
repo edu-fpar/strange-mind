@@ -221,6 +221,8 @@ function startStep(i, silent = false) {
   setBubble(st.say);
   if (!silent) speak(st.say);
   drawPanels();
+  // démonstration animée (main qui montre les gestes) au début de l'étape
+  if (st.demo) game.world.demo(game.world.get(st.demo.id), st.demo.moves);
 }
 
 function onCommit() {
