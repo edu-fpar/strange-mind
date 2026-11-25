@@ -9,7 +9,7 @@ Le pari : dans l'algèbre de Hestenes, les quatre équations de Maxwell n'en fon
 > avec F = E + I B (champ électromagnétique), ρ les charges et j les courants (unités où c = 1)
 
 et cette équation dit une seule chose : **la « loupe » ∇ appliquée au champ révèle ce qui le fabrique.**
-Comme le produit de deux flèches (`ab = a·b + a∧b`, leçon 6 des [leçons](../v1/) : « flèche × flèche = lapin + tourbillon »),
+Comme le produit de deux flèches (`ab = a·b + a∧b`, jeu 6 des [formes qui tournent](../v1/) : « flèche × flèche = lapin + tourbillon »),
 le produit de ∇ par un champ se coupe en deux morceaux :
 
 - **ce qui SORT** d'un endroit (∇·, un nombre : fontaine +, trou −) ;
@@ -56,7 +56,7 @@ Choix de conception, dans l'esprit des autres versions :
   change d'un côté à l'autre, ni le lac sans sentir que seul compte ce qui est à l'intérieur ;
 - **les pièges sont les vrais contresens** du sujet : « le vent fait le tour, donc le moulinet tourne » (faux hors
   du fil), « un vent uniforme fait avancer le bateau » (pas sur un tour complet), « l'aimant allume la lampe » (seulement s'il bouge) ;
-- **mêmes images que les leçons et les défis éclair** : lapin debout / tête en bas / nuage pour +1, −1, 0 ; ↺ rose et ↻ bleu pour les deux sens de rotation ;
+- **mêmes images que les formes qui tournent et les défis éclair** : lapin debout / tête en bas / nuage pour +1, −1, 0 ; ↺ rose et ↻ bleu pour les deux sens de rotation ;
 - **prévoir puis voir** : après la réponse, l'animation montre (le moulinet tourne, le lac se colore là où le vent
   pousse ↺ en rose et ↻ en bleu, les choses cachées apparaissent).
 

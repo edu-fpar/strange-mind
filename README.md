@@ -9,13 +9,13 @@ l'algèbre géométrique… puis les idées des équations de Maxwell, sans jama
 
 ![La machine à tourner : fais tourner B pour que le dauphin regarde à droite](screenshots/turning-machine-fr.png)
 
-## 1 · Les leçons (pour commencer, dès 5 ans)
+## 1 · Les formes qui tournent (pour commencer, dès 5 ans)
 
 ### ▶ [Jouer : edu-fpar.github.io/strange-mind/v1](https://edu-fpar.github.io/strange-mind/v1/)
 
-6 leçons guidées, avec des formes en 3D qu'on fait basculer et tourner, et des consignes lues à voix haute :
+6 jeux avec des formes en 3D qu'on fait basculer et tourner, et des consignes lues à voix haute :
 
-| # | Leçon | Notion |
+| # | Jeu | Notion |
 |---|---|---|
 | 1 | La machine à tourner | multiplier = additionner les angles |
 | 2 | La racine magique | √i, et x² = −1 a deux solutions |
@@ -24,8 +24,8 @@ l'algèbre géométrique… puis les idées des équations de Maxwell, sans jama
 | 5 | Deux miroirs font un tour | réflexions → rotation (Hestenes) |
 | 6 | Le tourbillon secret | bivecteur, ab = −ba |
 
-**Navigation libre** : toutes les leçons sont ouvertes dès le départ (accès direct `v1/#1` à `v1/#6`). Le bouton 🎓
-de chaque leçon donne l'explication pour les adultes. Voir [v1/README.md](v1/README.md).
+**Navigation libre** : tous les jeux sont ouverts dès le départ (accès direct `v1/#1` à `v1/#6`). Le bouton 🎓
+de chaque jeu donne l'explication pour les adultes. Voir [v1/README.md](v1/README.md).
 
 ## 2 · Le vent invisible (ensuite, vers les équations de Maxwell, dès 6 ans)
 
@@ -51,7 +51,7 @@ http://localhost:8765/ (un double-clic sur `index.html` ne suffit pas : les modu
 
 Les autres jeux de Strange Mind sont des prototypes, sur [fxpar/kid-games](https://github.com/fxpar/kid-games)
 ([jouer](https://fxpar.github.io/kid-games/strange-mind/)) : les défis éclair (v4), les tiroirs magiques (suite du
-vent invisible), la v1 complète (12 leçons), les cubes qui roulent (v2), les tourbillons (v3) et la chasse aux
+vent invisible), la v1 complète (12 niveaux), les cubes qui roulent (v2), les tourbillons (v3) et la chasse aux
 relations (v5). Leur historique reste dans ce dépôt, avant les commits qui les ont déplacés.
 
 ## Licence
@@ -71,7 +71,7 @@ algebra… and the ideas behind Maxwell's equations, without ever writing a form
 
 ![The turning machine: turn B so the dolphin faces right](screenshots/turning-machine-en.png)
 
-- **1 · The lessons** (start here) ([play](https://edu-fpar.github.io/strange-mind/v1/?lang=en)), age 5+: six guided lessons with
+- **1 · Shapes that turn** (start here) ([play](https://edu-fpar.github.io/strange-mind/v1/?lang=en)), age 5+: six games with
   3D shapes and spoken instructions (the turning machine, the magic root, the changing grid, the vanishing garden,
   two mirrors make a turn, the secret whirl), all open from the start.
 - **2 · The invisible wind** ([play](https://edu-fpar.github.io/strange-mind/maxwell/?lang=en)), age 6+: nine
@@ -80,7 +80,7 @@ algebra… and the ideas behind Maxwell's equations, without ever writing a form
   "predict" modes, 4 difficulty levels, streaks, medals, a 60-second Rush and a daily challenge. All games are
   open from the start.
 
-The other versions (quick challenges, magic drawers, the full 12-lesson v1, rolling cubes, whirls, relation hunt)
+The other versions (quick challenges, magic drawers, the full 12-level v1, rolling cubes, whirls, relation hunt)
 are prototypes in [fxpar/kid-games](https://github.com/fxpar/kid-games).
 
 **License:** © 2026 François Parlant — [CC BY-NC-SA 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/).

@@ -1,4 +1,4 @@
-# Strange Mind · Les leçons
+# Strange Mind · Les formes qui tournent
 
 Des formes plates qui sont en fait des volumes, des animaux qui sont des nombres.
 Un univers de jeu pour initier les enfants dès 5 ans aux rotations, aux nombres complexes,

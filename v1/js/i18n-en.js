@@ -6,7 +6,7 @@ export default {
   // ---- menu ----
   'Les formes cachent des secrets… et les animaux sont des nombres !': 'Shapes hide secrets… and animals are numbers!',
   '🧪 Bac à sable': '🧪 Sandbox',
-  'Les leçons': 'The lessons',
+  'Les formes qui tournent': 'Shapes that turn',
   'Accueil Strange Mind': 'Strange Mind home',
   '🖐️ Comment jouer': '🖐️ How to play',
   '⚙️ Réglages (pour les grands)': '⚙️ Settings (for grown-ups)',
