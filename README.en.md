@@ -2,7 +2,7 @@
 
 ### ▶ [Play: edu-fpar.github.io/strange-mind](https://edu-fpar.github.io/strange-mind/?lang=en)
 
-*[Version française](README.md)* · The games are also available in Spanish: [jugar en español](https://edu-fpar.github.io/strange-mind/?lang=es)
+*[Version française](README.md)* · *[Versión en español](README.es.md)*
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24544809.svg)](https://doi.org/10.5281/zenodo.24544809)
 Source code: [github.com/edu-fpar/strange-mind](https://github.com/edu-fpar/strange-mind)

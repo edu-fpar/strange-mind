@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24544809.svg)](https://doi.org/10.5281/zenodo.24544809)
 
-*[English version](README.en.md)* · Les jeux existent aussi en anglais et en espagnol : bouton de langue (FR → EN → ES), ou `?lang=en` / `?lang=es` dans l'adresse.
+*[English version](README.en.md)* · *[Versión en español](README.es.md)* · Les jeux existent aussi en anglais et en espagnol : bouton de langue (FR → EN → ES), ou `?lang=en` / `?lang=es` dans l'adresse.
 
 **Des jeux pour construire chez les enfants des intuitions sur les rotations, les nombres complexes, les matrices,
 l'algèbre géométrique… puis les idées des équations de Maxwell, sans jamais écrire une formule.**
