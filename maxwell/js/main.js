@@ -2,8 +2,9 @@
 import { GAMES, makeR } from './games.js';
 import { t, setDictionary, translateDom, langToggle, speechLang, voicePrefix } from './i18n.js';
 import EN from './i18n-en.js';
+import ES from './i18n-es.js';
 
-setDictionary(EN);
+setDictionary(EN, ES);
 translateDom();
 
 const $ = (s) => document.querySelector(s);

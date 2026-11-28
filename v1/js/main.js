@@ -3,22 +3,24 @@ import { World } from './engine.js';
 import { LEVELS, SANDBOX } from './levels.js';
 import { t, LANG, setDictionary, translateDom, langToggle, speechLang, voicePrefix } from './i18n.js';
 import EN, { EN_LEVELS } from './i18n-en.js';
+import ES, { ES_LEVELS } from './i18n-es.js';
 
 // ---------------- langue (français par défaut) ----------------
-setDictionary(EN);
+setDictionary(EN, ES);
 translateDom();
 langToggle(document.querySelector('#btn-lang'));
-// en anglais : on remplace les textes des niveaux (titre, notion, consignes) par leur version anglaise
-if (LANG === 'en') {
+// en anglais ou en espagnol : on remplace les textes des niveaux (titre, notion, consignes) par leur traduction
+const LV_TEXTS = { en: EN_LEVELS, es: ES_LEVELS }[LANG];
+if (LV_TEXTS) {
   for (const lv of [...LEVELS, SANDBOX]) {
-    const en = EN_LEVELS[lv.id];
-    if (!en) continue;
-    if (en.title) lv.title = en.title;
-    if (en.concept) lv.concept = en.concept;
-    (en.steps || []).forEach((es, i) => {
+    const tr = LV_TEXTS[lv.id];
+    if (!tr) continue;
+    if (tr.title) lv.title = tr.title;
+    if (tr.concept) lv.concept = tr.concept;
+    (tr.steps || []).forEach((ts, i) => {
       const st = lv.steps[i];
-      if (!st || !es) return;
-      for (const k of ['say', 'hint', 'bravo']) if (es[k] != null) st[k] = es[k];
+      if (!st || !ts) return;
+      for (const k of ['say', 'hint', 'bravo']) if (ts[k] != null) st[k] = ts[k];
     });
   }
 }
